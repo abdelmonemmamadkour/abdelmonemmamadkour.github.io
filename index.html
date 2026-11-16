@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MADKOUR.tech | الموقع الرسمي للمطور عبد المنعم مدكور</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #111827;
+      --surface-card: rgba(17, 24, 39, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.35);
+      --accent: #10b981;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --card-hover: rgba(30, 41, 59, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 15, 25, 0.85);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #2563eb, #10b981);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 22px;
+      box-shadow: 0 4px 20px var(--primary-glow);
+    }
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(to left, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-text span {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: -2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
+    }
+    .btn-contact {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-contact:hover {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 75px 0 50px;
+      text-align: center;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .badge-pill .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .hero-title {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 30px;
+    }
+
+    /* Apps Filter & Category Hub */
+    .apps-section {
+      padding: 30px 0 80px;
+    }
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 380px;
+      min-width: 260px;
+    }
+    .search-input {
+      width: 100%;
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 42px 12px 16px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
+    }
+    .search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Category Tabs */
+    .category-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+      background: rgba(17, 24, 39, 0.6);
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+    .cat-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .cat-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .cat-btn.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+    .cat-count {
+      font-size: 11px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .app-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      backdrop-filter: blur(14px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.12);
+    }
+    .app-top {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .app-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    .icon-dars { background: linear-gradient(135deg, #1e3a8a, #0284c7); border: 1px solid #38bdf8; }
+    .icon-ratbi { background: linear-gradient(135deg, #065f46, #059669); border: 1px solid #34d399; }
+    .icon-masareefi { background: linear-gradient(135deg, #4c1d95, #7c3aed); border: 1px solid #a78bfa; }
+    .icon-roboz { background: linear-gradient(135deg, #831843, #db2777); border: 1px solid #f472b6; }
+    .icon-games { background: linear-gradient(135deg, #b45309, #f59e0b); border: 1px solid #fcd34d; }
+
+    .app-meta h3 {
+      font-size: 21px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .app-badge-cat {
+      display: inline-block;
+      font-size: 12px;
+      color: #60a5fa;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .app-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin: 12px 0 16px;
+      line-height: 1.6;
+    }
+    .app-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11.5px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      color: #d1d5db;
+      font-weight: 600;
+    }
+    .app-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: auto;
+    }
+    .btn-playstore {
+      background: #fff;
+      color: #111;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 13.5px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-playstore:hover {
+      background: #e5e7eb;
+      transform: scale(1.02);
+    }
+    .link-privacy {
+      color: var(--text-muted);
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .link-privacy:hover {
+      color: #60a5fa;
+      text-decoration: underline;
+    }
+
+    /* Trust Box */
+    .trust-box {
+      margin: 50px 0 80px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+    .trust-content h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .trust-content p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      margin-bottom: 18px;
+    }
+    .trust-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .t-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+    .app-ads-card {
+      background: rgba(11, 15, 25, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .app-ads-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .app-ads-code {
+      background: #000;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #34d399;
+      direction: ltr;
+      text-align: left;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .btn-view-ads {
+      display: inline-block;
+      margin-top: 12px;
+      color: #60a5fa;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(11, 15, 25, 0.95);
+      padding: 40px 0 25px;
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: #fff;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 12.5px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 30px; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .trust-box { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand">
+        <div class="brand-logo">M</div>
+        <div class="brand-text">
+          <h1>MADKOUR.tech</h1>
+          <span>Official Developer Studio</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#apps" class="active">أقسام التطبيقات</a></li>
+        <li><a href="#trust">الامتثال و AdMob</a></li>
+        <li><a href="mailto:abdelmonem.m.a.madkour@gmail.com">الدعم والتواصل</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <a href="mailto:abdelmonem.m.a.madkour@gmail.com" class="btn-contact">تواصل مع المطور ✉️</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge-pill">
+        <span class="pulse-dot"></span>
+        المقر الرقمي لتطبيقات المطور عبد المنعم مدكور • MADKOUR.tech
+      </div>
+      <h2 class="hero-title">
+        حلول ذكية مقسمة حسب اهتماماتك<br>
+        <span>تعليم • مالية • ذكاء اصطناعي • ألعاب</span>
+      </h2>
+      <p class="hero-sub">
+        تصفح تطبيقاتنا المعتمدة على Google Play مقسمة حسب الفئات لتصل لما تحتاجه بضغطة واحدة.
+      </p>
+    </div>
+  </section>
+
+  <!-- Apps Categories Hub -->
+  <section class="container apps-section" id="apps">
+    
+    <div class="filter-header">
+      <div>
+        <h2 style="font-size: 26px; font-weight: 800; color: #fff;">أقسام التطبيقات (App Categories)</h2>
+        <p style="font-size: 14px; color: var(--text-muted);">اختر القسم المطلوب للتصفية الفورية:</p>
+      </div>
+
+      <!-- Quick Search -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="appSearch" class="search-input" placeholder="ابحث باسم التطبيق أو الوظيفة..." oninput="handleSearch()">
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="category-tabs">
+      <button class="cat-btn active" onclick="filterCategory('all', this)">
+        <span>🌟 الكل</span>
+        <span class="cat-count" id="countAll">5</span>
+      </button>
+      <button class="cat-btn" onclick="filterCategory('edu', this)">
+        <span>🎓 تطبيقات تعليمية</span>
+        <span class="cat-count">1</span>
+      </button>
+      <button class="cat-btn" onclick="filterCategory('finance', this)">
+        <span>💰 تطبيقات مالية ومصاريف</span>
+        <span class="cat-count">2</span>
+      </button>
+      <button class="cat-btn" onclick="filterCategory('ai', this)">
+        <span>🤖 ذكاء اصطناعي وأدوات</span>
+        <span class="cat-count">1</span>
+      </button>
+      <button class="cat-btn" onclick="filterCategory('games', this)">
+        <span>🎮 ألعاب وترفيه</span>
+        <span class="cat-count">1</span>
+      </button>
+    </div>
+
+    <!-- Apps Grid -->
+    <div class="apps-grid" id="appsContainer">
+
+      <!-- App 1: Dars Khosousy (Edu) -->
+      <div class="app-card" data-cat="edu" data-title="درس خصوصي تعليم ذكاء اصطناعي مذاكرة أزهر ثانوية dars private tutor">
+        <div>
+          <div class="app-top">
+            <div class="app-icon icon-dars">🎓</div>
+            <div class="app-meta">
+              <h3>درس خصوصي (Private Tutor AI)</h3>
+              <span class="app-badge-cat">قسم: التطبيقات التعليمية</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            معلّمك الخصوصي الذكي لمناهج 17 دولة ومنظومة الأزهر الشريف بالكامل. يدعم حل المسائل بالكاميرا خطوة بخطوة بالذكاء الاصطناعي و9 لغات عالمية.
+          </p>
+          <div class="app-tags">
+            <span class="tag">تعليمي</span>
+            <span class="tag">17 دولة</span>
+            <span class="tag">الأزهر الشريف</span>
+            <span class="tag">كاميرا وحل فوري</span>
+          </div>
+        </div>
+        <div class="app-footer">
+          <a href="#" class="btn-playstore">
+            <span>تحميل التطبيق</span>
+            <span>➔</span>
+          </a>
+          <a href="dars-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+        </div>
+      </div>
+
+      <!-- App 2: Ratbi (Finance) -->
+      <div class="app-card" data-cat="finance" data-title="راتبي مرتبات فلوس رواتب حساب الموظفين ratbi finance">
+        <div>
+          <div class="app-top">
+            <div class="app-icon icon-ratbi">💰</div>
+            <div class="app-meta">
+              <h3>تطبيق راتبي (Ratbi)</h3>
+              <span class="app-badge-cat">قسم: التطبيقات المالية</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            الحساب الذكي الدقيق للمرتبات والحوافز والبدلات، مع مؤقت تنازلي وتنبيهات مواعيد صرف الرواتب للموظفين وإدارة الالتزامات المالية.
+          </p>
+          <div class="app-tags">
+            <span class="tag">مالي</span>
+            <span class="tag">حساب المرتبات</span>
+            <span class="tag">مواعيد الصرف</span>
+            <span class="tag">Google Play</span>
+          </div>
+        </div>
+        <div class="app-footer">
+          <a href="https://play.google.com/store/apps/details?id=com.ratbi.salaryapp" target="_blank" class="btn-playstore">
+            <span>Google Play (منشور)</span>
+            <span>➔</span>
+          </a>
+          <a href="ratbi-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+        </div>
+      </div>
+
+      <!-- App 3: Masareefi (Finance) -->
+      <div class="app-card" data-cat="finance" data-title="مصاريفي ميزانية مصاريف مصروف تتبع ادخار masareefi tracker">
+        <div>
+          <div class="app-top">
+            <div class="app-icon icon-masareefi">📊</div>
+            <div class="app-meta">
+              <h3>تطبيق مصاريفي (Masareefi)</h3>
+              <span class="app-badge-cat">قسم: التطبيقات المالية</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            تتبع يومي للمصروفات وتقسيم الميزانية الشهرية في رسوم بيانية واضحة، لمساعدتك في التوفير والادخار وإدارة دخلك بذكاء.
+          </p>
+          <div class="app-tags">
+            <span class="tag">مالي</span>
+            <span class="tag">إدارة الميزانية</span>
+            <span class="tag">تقارير بيانية</span>
+            <span class="tag">Google Play</span>
+          </div>
+        </div>
+        <div class="app-footer">
+          <a href="https://play.google.com/store/apps/details?id=tech.madkour.masareefi" target="_blank" class="btn-playstore">
+            <span>Google Play (منشور)</span>
+            <span>➔</span>
+          </a>
+          <a href="masareefi-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+        </div>
+      </div>
+
+      <!-- App 4: Roboz AI (AI & Tools) -->
+      <div class="app-card" data-cat="ai" data-title="روبوز شات ذكاء اصطناعي روبوت كتابة ترجمة roboz ai chatbot">
+        <div>
+          <div class="app-top">
+            <div class="app-icon icon-roboz">🤖</div>
+            <div class="app-meta">
+              <h3>روبوز (Roboz AI)</h3>
+              <span class="app-badge-cat">قسم: أدوات الذكاء الاصطناعي</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            مساعدك الشخصي الذكي للترجمة الفورية، صياغة الإيميلات الاحترافية، كتابة الأكواد، وتوليد الأفكار الإبداعية بسرعة وأمان.
+          </p>
+          <div class="app-tags">
+            <span class="tag">ذكاء اصطناعي</span>
+            <span class="tag">شات ومساعد</span>
+            <span class="tag">برمجة ومحتوى</span>
+            <span class="tag">توليدي</span>
+          </div>
+        </div>
+        <div class="app-footer">
+          <a href="#" class="btn-playstore">
+            <span>صفحة المتجر</span>
+            <span>➔</span>
+          </a>
+          <a href="roboz-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+        </div>
+      </div>
+
+      <!-- App 5: Games Teaser Card -->
+      <div class="app-card" data-cat="games" data-title="العاب العاب ذكاء تسلية ترفيه games puzzle">
+        <div>
+          <div class="app-top">
+            <div class="app-icon icon-games">🎮</div>
+            <div class="app-meta">
+              <h3>ألعاب الذكاء والتسلية (Coming Soon)</h3>
+              <span class="app-badge-cat" style="color:#f59e0b;">قسم: الألعاب والترفيه</span>
+            </div>
+          </div>
+          <p class="app-desc">
+            ألعاب تفاعلية مسلية وتحديات فكرية وألغاز ذكاء قادمة قريباً ومصممة لجميع الأعمار بجرافيك عالي الجودة وتجربة ممتعة خفيفة.
+          </p>
+          <div class="app-tags">
+            <span class="tag">ألعاب</span>
+            <span class="tag">ألغاز وذكاء</span>
+            <span class="tag">تحديات يومية</span>
+            <span class="tag" style="color:#f59e0b; border-color: rgba(245, 158, 11, 0.3);">قريباً على المتجر</span>
+          </div>
+        </div>
+        <div class="app-footer">
+          <span style="font-size:13px; font-weight:700; color:#f59e0b;">قيد التطوير والتجهيز ⏳</span>
+          <span class="link-privacy">MADKOUR Games</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Google Play & AdMob Trust Center -->
+  <section class="container" id="trust">
+    <div class="trust-box">
+      <div class="trust-content">
+        <h3>الامتثال والمعايير الرسمية لـ Google</h3>
+        <p>
+          نلتزم في جميع تطبيقاتنا بأعلى معايير الأمان وحماية خصوصية المستخدم وسياسات Google Play Developer Program و AdMob Publisher Policies.
+        </p>
+        <div class="trust-badges">
+          <span class="t-badge">✓ Google Play Verified</span>
+          <span class="t-badge">✓ AdMob app-ads.txt Validated</span>
+          <span class="t-badge">✓ 100% GDPR Compliant</span>
+          <span class="t-badge">✓ SSL Encrypted Connection</span>
+        </div>
+      </div>
+
+      <div class="app-ads-card">
+        <div class="app-ads-header">
+          <span>ملف الأمان الإعلاني (app-ads.txt)</span>
+          <span style="color:#10b981;">● نشط ومطابق</span>
+        </div>
+        <div class="app-ads-code">
+google.com, pub-5678156801731088, DIRECT, f08c47fec0942fa0
+        </div>
+        <a href="app-ads.txt" class="btn-view-ads">عرض الملف الحي على الرابط المباشر ➔</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-top">
+        <div class="brand">
+          <div class="brand-logo" style="width:36px; height:36px; font-size:18px;">M</div>
+          <div class="brand-text">
+            <h1 style="font-size:18px;">MADKOUR.tech</h1>
+            <span>Eng. Abdelmonem Madkour</span>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="#apps">تطبيقاتنا</a>
+          <a href="app-ads.txt">app-ads.txt</a>
+          <a href="dars-privacy.html">سياسة الخصوصية</a>
+          <a href="mailto:abdelmonem.m.a.madkour@gmail.com">الدعم الفني</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        جميع الحقوق محفوظة © 2026 MADKOUR.tech • المطور عبد المنعم مدكور (abdelmonem.m.a.madkour@gmail.com)
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentCategory = 'all';
+
+    function filterCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function handleSearch() {
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById('appSearch').value || '').trim().toLowerCase();
+      const cards = document.querySelectorAll('.app-card');
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-cat');
+        const cardTitle = (card.getAttribute('data-title') || '').toLowerCase();
+
+        const matchesCat = (currentCategory === 'all' || cardCat === currentCategory);
+        const matchesSearch = (!q || cardTitle.includes(q));
+
+        if (matchesCat && matchesSearch) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية | Privacy Policy - درس خصوصي (Dars Khosousy)</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131b2e;
+            --border-color: rgba(56, 189, 248, 0.2);
+            --primary: #38bdf8;
+            --accent: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding: 24px 16px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .lang-switch-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 13.5px;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--primary); }
+        .lang-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .lang-btn {
+            background: #1e293b;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: #0b0f19;
+            border-color: var(--primary);
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+        h1 { color: var(--primary); margin-top: 0; font-size: 23px; display: flex; align-items: center; gap: 10px; }
+        h2 { color: var(--accent); font-size: 17px; margin-top: 24px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px; }
+        p, li { color: #cbd5e1; font-size: 14.5px; }
+        ul { padding-inline-start: 22px; }
+        li { margin-bottom: 8px; }
+        code { background: rgba(56, 189, 248, 0.12); color: var(--primary); padding: 2px 6px; border-radius: 6px; font-size: 13px; }
+        .badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+        .contact-box { background: rgba(56, 189, 248, 0.08); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-top: 20px; }
+        .footer-note { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 30px; }
+        [dir="ltr"] { text-align: left; }
+        [dir="rtl"] { text-align: right; }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switch-bar">
+        <a href="index.html" class="back-btn" id="backBtnText">⬅ العودة للتطبيق</a>
+        <div class="lang-btns">
+            <button type="button" class="lang-btn active" onclick="setLang('ar')">العربية</button>
+            <button type="button" class="lang-btn" onclick="setLang('en')">English</button>
+        </div>
+    </div>
+
+    <!-- القسم العربي -->
+    <div id="content-ar" class="card" dir="rtl">
+        <h1>🎓 سياسة الخصوصية — درس خصوصي (Dars Khosousy)</h1>
+        <p>
+            <span class="badge">معتمد لـ Google Play</span> &nbsp;
+            <strong>تاريخ السريان:</strong> نوفمبر 2026 &nbsp;|&nbsp;
+            <strong>معرف الحزمة:</strong> <code>tech.madkour.darskhosousy</code> &nbsp;|&nbsp;
+            <strong>المطور:</strong> Madkour Tech
+        </p>
+
+        <p>مرحباً بك في تطبيق <strong>"درس خصوصي" (Dars Khosousy - Private Tutor AI)</strong>. نحن نأخذ خصوصية الطلاب وأولياء الأمور والمعلمين بأعلى درجات الجدية، ونلتزم التزاماً كاملاً بسياسات Google Play Developer وقوانين حماية خصوصية الأطفال (COPPA و GDPR-K).</p>
+
+        <h2>1. البيانات التي نجمعها وكيفية معالجتها</h2>
+        <ul>
+            <li><strong>الأسئلة والنصوص التعليمية:</strong> يتم إرسال الأسئلة النصية أو أسئلة الامتحانات التي يكتبها الطالب مباشرة إلى خوادم الذكاء الاصطناعي (Google Gemini AI) بهدف وحيد هو تقديم شرح تربوي مفصل خطوة بخطوة بالحل النموذجي.</li>
+            <li><strong>صور المسائل والواجبات (الكاميرا والمعرض):</strong> عندما يلتقط الطالب صورة لمسألة أو صفحة كتاب مدرسي، تتم معالجة الصورة فوراً لفك رموز المسألة وشرحها. لا يتم تخزين صورك أو أرشفتها على خوادمنا الشخصية.</li>
+            <li><strong>التخزين المحلي الآمن (Local Storage):</strong> كافة إعدادات الطالب (الدولة المختارة، المرحلة الدراسية، المواد، الرصيد المتبقي لليوم، ومفتاح API الشخصي في نظام BYOK) تُحفظ <strong>محلياً فقط على هاتفك</strong>، ولا يتم رفعها أو مشاركتها مع أي خادم خارجي.</li>
+            <li><strong>الميكروفون والإملاء الصوتي:</strong> يُستخدم إذن الميكروفون فقط لتحويل صوت الطالب إلى نص عند الضغط على زر الإملاء الصوتي عبر محرك Google Speech الرسمي بهاتفك.</li>
+        </ul>
+
+        <h2>2. خدمات الإعلانات والجهات الخارجية (Google AdMob)</h2>
+        <p>لضمان استمرار تقديم خدمات التطبيق والمناهج التعليمية مجاناً لجميع الطلاب، يعرض التطبيق مساحات إعلانية آمنة متوافقة مع إرشادات العائلة من Google:</p>
+        <ul>
+            <li><strong>Google AdMob:</strong> قد تجمع Google معرف الإعلانات الخاص بجهازك لتقديم إعلانات ملائمة وآمنة وفقاً لـ <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">سياسة خصوصية Google</a>.</li>
+            <li><strong>إعلانات المكافأة الاختيارية:</strong> تُشاهد الإعلانات بمحض إرادة الطالب فقط عند رغبته في مضاعفة رصيد الأسئلة اليومي أو تحميل مذكرة الشرح PDF.</li>
+        </ul>
+
+        <h2>3. خصوصية الأطفال والطلاب (COPPA & Children's Privacy)</h2>
+        <p>تطبيق "درس خصوصي" مصمم ليكون بيئة تعليمية آمنة 100% للطلاب من مختلف الأعمار:</p>
+        <ul>
+            <li>لا نطلب إنشاء حساب بالاسم الحقيقي أو تسجيل دخول برقم الهاتف.</li>
+            <li>لا نجمع أي معلومات تعريف شخصية (PII) من القاصرين أو الأطفال.</li>
+            <li>المحتوى الإعلاني المعروض مخصص ليكون آمناً وملائماً لجميع أفراد الأسرة.</li>
+        </ul>
+
+        <h2>4. حفظ البيانات وحذفها (Data Retention & Deletion)</h2>
+        <p>نظراً لأن جميع بيانات وسجل المحادثات والمفاتيح محفوظة محلياً على جهازك، فإنه يمكنك حذف كافة بياناتك فوراً في أي وقت بإحدى الطرق التالية:</p>
+        <ul>
+            <li>الضغط على زر <strong>"مسح"</strong> داخل نافذة الرصيد لمسح مفتاحك فوراً.</li>
+            <li>مسح بيانات التطبيق أو إلغاء تثبيت التطبيق من إعدادات الهاتف لمسح كافة السجلات في ثانية واحدة.</li>
+        </ul>
+
+        <h2>5. التواصل والدعم الفني</h2>
+        <div class="contact-box">
+            <p style="margin:0 0 6px 0;">إذا كان لديك أي سؤال أو استفسار حول سياسة الخصوصية أو بياناتك التعليمية، يمكنك التواصل معنا مباشرة:</p>
+            <p style="margin:0;">📧 <strong>البريد الإلكتروني للدعم والمطور:</strong> <code>abdelmonem.m.a.madkour@gmail.com</code></p>
+            <p style="margin:6px 0 0 0;">🏢 <strong>الجهة المطورة:</strong> Madkour Tech Solutions — Cairo, Egypt</p>
+        </div>
+    </div>
+
+    <!-- English Section -->
+    <div id="content-en" class="card" dir="ltr" style="display:none;">
+        <h1>🎓 Privacy Policy — Dars Khosousy (Private Tutor AI)</h1>
+        <p>
+            <span class="badge">Google Play Compliant</span> &nbsp;
+            <strong>Effective Date:</strong> November 2026 &nbsp;|&nbsp;
+            <strong>Package Name:</strong> <code>tech.madkour.darskhosousy</code> &nbsp;|&nbsp;
+            <strong>Developer:</strong> Madkour Tech
+        </p>
+
+        <p>Welcome to <strong>"Dars Khosousy" (Private Tutor AI)</strong>. We take the privacy of students, parents, and educators very seriously and are fully committed to complying with Google Play Developer Policies, COPPA (Children's Online Privacy Protection Act), and GDPR-K regulations.</p>
+
+        <h2>1. Information We Collect and How It Is Used</h2>
+        <ul>
+            <li><strong>Study Questions & Prompts:</strong> Text prompts and curriculum questions entered by the student are transmitted directly to Google Gemini AI servers solely to generate pedagogical, step-by-step educational explanations and model solutions.</li>
+            <li><strong>Homework Photos & Camera Access:</strong> When you snap a photo of a textbook exercise or homework assignment, the image is transmitted securely to interpret the problem. We do not archive or store your homework photos on external servers.</li>
+            <li><strong>Local On-Device Storage (LocalStorage):</strong> All student preferences (selected country, academic stage, daily question quota, and your personal API key in BYOK mode) are stored <strong>strictly locally on your device</strong>. They are never transmitted to our private servers.</li>
+            <li><strong>Microphone & Audio Dictation:</strong> Microphone permissions are used exclusively when you tap the voice dictation button to convert your spoken query into text using the device's native speech recognition engine.</li>
+        </ul>
+
+        <h2>2. Third-Party Services & Advertising (Google AdMob)</h2>
+        <p>To keep the application and all national curricula 100% free for students worldwide, the app integrates family-safe Google AdMob advertising:</p>
+        <ul>
+            <li><strong>Google AdMob:</strong> Google may use device advertising identifiers to serve non-intrusive, family-safe ads in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">Google's Privacy Policy</a>.</li>
+            <li><strong>Optional Rewarded Ads:</strong> Ads are watched strictly upon user consent when seeking extra daily questions or exporting study notes as a PDF.</li>
+        </ul>
+
+        <h2>3. Children's Privacy & COPPA Compliance</h2>
+        <p>Dars Khosousy is engineered as a secure educational environment suitable for all ages:</p>
+        <ul>
+            <li>We do not require account registration, personal phone numbers, or social media logins.</li>
+            <li>We never collect or sell Personally Identifiable Information (PII) from minors.</li>
+            <li>Ad inventory is configured to adhere to Google Families self-certified policies.</li>
+        </ul>
+
+        <h2>4. Data Retention and User Deletion Rights</h2>
+        <p>Because all interaction history and settings are maintained on-device, you maintain total control over your data:</p>
+        <ul>
+            <li>You can clear your personal API key anytime by tapping <strong>"Clear"</strong> in the Quota screen.</li>
+            <li>Clearing the app's cache/storage or uninstalling the app permanently purges all local records instantaneously.</li>
+        </ul>
+
+        <h2>5. Developer Contact Information</h2>
+        <div class="contact-box">
+            <p style="margin:0 0 6px 0;">For questions, feedback, or inquiries regarding this Privacy Policy, please contact our team:</p>
+            <p style="margin:0;">📧 <strong>Support Email:</strong> <code>abdelmonem.m.a.madkour@gmail.com</code></p>
+            <p style="margin:6px 0 0 0;">🏢 <strong>Developer:</strong> Madkour Tech Solutions — Cairo, Egypt</p>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        &copy; 2026 Dars Khosousy (Private Tutor AI). All rights reserved.
+    </div>
+
+    <script>
+        function setLang(lang) {
+            const arContent = document.getElementById('content-ar');
+            const enContent = document.getElementById('content-en');
+            const backBtn = document.getElementById('backBtnText');
+            const btns = document.querySelectorAll('.lang-btn');
+
+            btns.forEach(b => b.classList.remove('active'));
+
+            if (lang === 'en') {
+                arContent.style.display = 'none';
+                enContent.style.display = 'block';
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                backBtn.textContent = '⬅ Back to App';
+                btns[1].classList.add('active');
+            } else {
+                arContent.style.display = 'block';
+                enContent.style.display = 'none';
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                backBtn.textContent = '⬅ العودة للتطبيق';
+                btns[0].classList.add('active');
+            }
+        }
+
+        // Auto-detect browser/device language
+        if (navigator.language && !navigator.language.startsWith('ar')) {
+            setLang('en');
+        }
+    </script>
+</body>
+</html>
