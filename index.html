@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MADKOUR.tech | الموقع الرسمي للمطور عبد المنعم مدكور</title>
+  <title id="docTitle">MADKOUR.tech | الموقع الرسمي للمطور عبد المنعم مدكور</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0b0f19;
@@ -25,7 +25,18 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html[dir="rtl"] * {
       font-family: 'Cairo', system-ui, sans-serif;
+    }
+
+    html[dir="ltr"] * {
+      font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .brand-text h1, .brand-logo, .app-ads-code {
+      font-family: 'Outfit', sans-serif !important;
     }
 
     body {
@@ -38,6 +49,7 @@
         radial-gradient(circle at 85% 60%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
         radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
       background-attachment: fixed;
+      transition: direction 0.2s ease;
     }
 
     .container {
@@ -81,7 +93,6 @@
       box-shadow: 0 4px 20px var(--primary-glow);
     }
     .brand-text h1 {
-      font-family: 'Outfit', sans-serif;
       font-size: 20px;
       font-weight: 800;
       letter-spacing: 0.5px;
@@ -110,6 +121,43 @@
     .nav-links a:hover, .nav-links a.active {
       color: #fff;
     }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* زر اختيار اللغة */
+    .btn-lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f3f4f6;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .btn-lang:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.5);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .btn-lang .lang-flag {
+      font-size: 17px;
+      line-height: 1;
+    }
+    .btn-lang .lang-arrow {
+      font-size: 10px;
+      opacity: 0.7;
+    }
+
     .btn-contact {
       background: rgba(59, 130, 246, 0.15);
       border: 1px solid rgba(59, 130, 246, 0.4);
@@ -120,6 +168,9 @@
       font-size: 14px;
       text-decoration: none;
       transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
     .btn-contact:hover {
       background: #2563eb;
@@ -127,83 +178,206 @@
       box-shadow: 0 4px 15px var(--primary-glow);
     }
 
+    /* نافذة اختيار اللغات (Language Modal) */
+    .lang-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeIn 0.2s ease;
+    }
+    .lang-modal-overlay.active {
+      display: flex;
+    }
+    .lang-modal-card {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 620px;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(59, 130, 246, 0.2);
+      padding: 26px;
+      position: relative;
+    }
+    .lang-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .lang-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-modal-title h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .lang-modal-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .lang-modal-close {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lang-modal-close:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.5);
+      color: #f87171;
+    }
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 12px;
+    }
+    .lang-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: inherit;
+      width: 100%;
+    }
+    .lang-item-btn:hover {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .lang-item-btn.active {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: #3b82f6;
+      color: #60a5fa;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+    .lang-item-flag {
+      font-size: 24px;
+      line-height: 1;
+    }
+    .lang-item-names {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+    .lang-item-native {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .lang-item-en {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
     /* Hero */
     .hero {
-      padding: 75px 0 50px;
       text-align: center;
+      padding: 70px 0 50px;
     }
     .badge-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399;
       padding: 6px 16px;
-      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 9999px;
+      color: #93c5fd;
       font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 22px;
+      font-weight: 600;
+      margin-bottom: 24px;
     }
-    .badge-pill .pulse-dot {
+    .pulse-dot {
       width: 8px;
       height: 8px;
-      border-radius: 50%;
       background: #10b981;
+      border-radius: 50%;
       box-shadow: 0 0 10px #10b981;
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.4; transform: scale(1.2); }
     }
     .hero-title {
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 900;
-      line-height: 1.3;
+      line-height: 1.25;
       margin-bottom: 18px;
       color: #fff;
     }
     .hero-title span {
-      background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+      background: linear-gradient(135deg, #60a5fa, #34d399);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero-sub {
       font-size: 17px;
       color: var(--text-muted);
-      max-width: 720px;
-      margin: 0 auto 30px;
+      max-width: 650px;
+      margin: 0 auto;
     }
 
-    /* Apps Filter & Category Hub */
+    /* Apps Section & Filter */
     .apps-section {
-      padding: 30px 0 80px;
+      padding: 20px 0 60px;
     }
     .filter-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 28px;
+      gap: 20px;
+      margin-bottom: 25px;
     }
     .search-box {
       position: relative;
-      flex: 1;
-      max-width: 380px;
-      min-width: 260px;
+      min-width: 280px;
     }
     .search-input {
       width: 100%;
       background: rgba(17, 24, 39, 0.8);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 42px 12px 16px;
       color: #fff;
+      border-radius: 12px;
       font-size: 14px;
       outline: none;
       transition: all 0.2s;
+    }
+    html[dir="rtl"] .search-input {
+      padding: 10px 42px 10px 14px;
+    }
+    html[dir="ltr"] .search-input {
+      padding: 10px 14px 10px 42px;
     }
     .search-input:focus {
       border-color: #3b82f6;
@@ -211,11 +385,18 @@
     }
     .search-icon {
       position: absolute;
-      right: 14px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
       pointer-events: none;
+    }
+    html[dir="rtl"] .search-icon {
+      right: 14px;
+      left: auto;
+    }
+    html[dir="ltr"] .search-icon {
+      left: 14px;
+      right: auto;
     }
 
     /* Category Tabs */
@@ -234,80 +415,80 @@
       border: none;
       color: var(--text-muted);
       padding: 10px 20px;
-      border-radius: 12px;
-      font-size: 14px;
+      border-radius: 10px;
       font-weight: 700;
+      font-size: 14px;
       cursor: pointer;
-      display: inline-flex;
+      transition: all 0.2s;
+      display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s;
     }
     .cat-btn:hover {
       color: #fff;
       background: rgba(255, 255, 255, 0.05);
     }
     .cat-btn.active {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      background: #2563eb;
       color: #fff;
       box-shadow: 0 4px 15px var(--primary-glow);
     }
     .cat-count {
+      background: rgba(255, 255, 255, 0.15);
       font-size: 11px;
-      background: rgba(0, 0, 0, 0.25);
       padding: 2px 7px;
-      border-radius: 999px;
-      font-family: 'Outfit', sans-serif;
+      border-radius: 9999px;
+      font-weight: 800;
     }
 
-    /* Grid */
+    /* Apps Grid */
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 24px;
     }
     .app-card {
       background: var(--surface-card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 26px;
-      backdrop-filter: blur(14px);
+      padding: 24px;
+      backdrop-filter: blur(12px);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
     }
     .app-card:hover {
       transform: translateY(-4px);
-      background: var(--card-hover);
       border-color: rgba(59, 130, 246, 0.4);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.12);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.15);
+      background: var(--card-hover);
     }
     .app-top {
       display: flex;
+      align-items: center;
       gap: 16px;
-      align-items: flex-start;
-      margin-bottom: 14px;
     }
     .app-icon {
-      width: 68px;
-      height: 68px;
-      border-radius: 16px;
+      width: 58px;
+      height: 58px;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 34px;
+      font-size: 28px;
       flex-shrink: 0;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
-    .icon-dars { background: linear-gradient(135deg, #1e3a8a, #0284c7); border: 1px solid #38bdf8; }
-    .icon-ratbi { background: linear-gradient(135deg, #065f46, #059669); border: 1px solid #34d399; }
-    .icon-masareefi { background: linear-gradient(135deg, #4c1d95, #7c3aed); border: 1px solid #a78bfa; }
-    .icon-roboz { background: linear-gradient(135deg, #831843, #db2777); border: 1px solid #f472b6; }
-    .icon-games { background: linear-gradient(135deg, #b45309, #f59e0b); border: 1px solid #fcd34d; }
+    .icon-dars { background: linear-gradient(135deg, #10b981, #047857); }
+    .icon-ratbi { background: linear-gradient(135deg, #f59e0b, #b45309); }
+    .icon-masareefi { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .icon-roboz { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .icon-games { background: linear-gradient(135deg, #ec4899, #be185d); }
 
     .app-meta h3 {
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 800;
       color: #fff;
     }
@@ -319,7 +500,7 @@
       margin-top: 2px;
     }
     .app-desc {
-      font-size: 14.5px;
+      font-size: 14px;
       color: var(--text-muted);
       margin: 12px 0 16px;
       line-height: 1.6;
@@ -364,6 +545,16 @@
       background: #e5e7eb;
       transform: scale(1.02);
     }
+    .arrow-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+    html[dir="rtl"] .arrow-icon {
+      transform: rotate(180deg);
+    }
+    html[dir="ltr"] .arrow-icon {
+      transform: rotate(0deg);
+    }
     .link-privacy {
       color: var(--text-muted);
       font-size: 13px;
@@ -378,30 +569,31 @@
 
     /* Trust Box */
     .trust-box {
-      margin: 50px 0 80px;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 20px;
-      padding: 32px;
+      margin-top: 60px;
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.8) 0%, rgba(11, 15, 25, 0.9) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 30px;
       align-items: center;
     }
     .trust-content h3 {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 800;
+      margin-bottom: 12px;
       color: #fff;
-      margin-bottom: 10px;
     }
     .trust-content p {
       color: var(--text-muted);
       font-size: 14.5px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
     .trust-badges {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .t-badge {
@@ -409,7 +601,7 @@
       align-items: center;
       gap: 6px;
       background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       color: #34d399;
       font-size: 12.5px;
       font-weight: 700;
@@ -417,48 +609,55 @@
       border-radius: 8px;
     }
     .app-ads-card {
-      background: rgba(11, 15, 25, 0.85);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
       padding: 20px;
     }
     .app-ads-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 12px;
       font-size: 13px;
       font-weight: 700;
-      color: #9ca3af;
-      margin-bottom: 10px;
     }
     .app-ads-code {
-      background: #000;
+      background: rgba(0, 0, 0, 0.6);
       padding: 12px;
       border-radius: 8px;
-      font-family: monospace;
-      font-size: 13px;
-      color: #34d399;
-      direction: ltr;
-      text-align: left;
-      overflow-x: auto;
+      font-size: 12px;
+      color: #60a5fa;
+      word-break: break-all;
+      margin-bottom: 12px;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      direction: ltr !important;
+      text-align: left;
     }
     .btn-view-ads {
-      display: inline-block;
-      margin-top: 12px;
-      color: #60a5fa;
+      display: block;
+      text-align: center;
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 8px;
+      border-radius: 8px;
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-view-ads:hover {
+      background: #2563eb;
+      color: #fff;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
+      padding: 50px 0 30px;
+      margin-top: 60px;
       background: rgba(11, 15, 25, 0.95);
-      padding: 40px 0 25px;
-      color: var(--text-muted);
-      font-size: 13.5px;
     }
     .footer-top {
       display: flex;
@@ -466,16 +665,18 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
     .footer-links {
       display: flex;
-      gap: 18px;
+      gap: 24px;
+      flex-wrap: wrap;
     }
     .footer-links a {
       color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s;
+      font-size: 14px;
     }
     .footer-links a:hover {
       color: #fff;
@@ -485,13 +686,17 @@
       padding-top: 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 12.5px;
+      color: var(--text-muted);
     }
 
     @media (max-width: 768px) {
-      .hero-title { font-size: 30px; }
+      .hero-title { font-size: 28px; }
       .apps-grid { grid-template-columns: 1fr; }
       .trust-box { grid-template-columns: 1fr; }
       .nav-links { display: none; }
+      .btn-contact { display: none; }
+      .btn-lang { padding: 6px 11px; font-size: 12.5px; }
+      .lang-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -504,34 +709,63 @@
         <div class="brand-logo">M</div>
         <div class="brand-text">
           <h1>MADKOUR.tech</h1>
-          <span>Official Developer Studio</span>
+          <span data-i18n="brandSubtitle">Official Developer Studio</span>
         </div>
       </a>
 
       <ul class="nav-links">
-        <li><a href="#apps" class="active">أقسام التطبيقات</a></li>
-        <li><a href="#trust">الامتثال و AdMob</a></li>
-        <li><a href="mailto:abdelmonem.m.a.madkour@gmail.com">الدعم والتواصل</a></li>
+        <li><a href="#apps" class="active" data-i18n="navApps">أقسام التطبيقات</a></li>
+        <li><a href="#trust" data-i18n="navTrust">الامتثال و AdMob</a></li>
+        <li><a href="mailto:abdelmonem.m.a.madkour@gmail.com" data-i18n="navContact">الدعم والتواصل</a></li>
       </ul>
 
       <div class="header-actions">
-        <a href="mailto:abdelmonem.m.a.madkour@gmail.com" class="btn-contact">تواصل مع المطور ✉️</a>
+        <!-- زر فتح نافذة اللغات العالمية -->
+        <button type="button" class="btn-lang" id="langSwitchBtn" onclick="openLangModal()" aria-label="Choose Language">
+          <span class="lang-flag" id="activeLangFlag">🇪🇬</span>
+          <span id="activeLangName">العربية</span>
+          <span class="lang-arrow">▾</span>
+        </button>
+
+        <a href="mailto:abdelmonem.m.a.madkour@gmail.com" class="btn-contact">
+          <span data-i18n="contactBtn">تواصل مع المطور ✉️</span>
+        </a>
       </div>
     </div>
   </header>
+
+  <!-- نافذة اختيار اللغات المنبثقة (Language Modal) -->
+  <div class="lang-modal-overlay" id="langModal" onclick="closeLangModal(event)">
+    <div class="lang-modal-card" onclick="event.stopPropagation()">
+      <div class="lang-modal-header">
+        <div class="lang-modal-title">
+          <span style="font-size:24px;">🌍</span>
+          <div>
+            <h3 data-i18n="langModalTitle">اختر لغة الموقع</h3>
+            <p data-i18n="langModalSub">الموقع يدعم التحويل التلقائي واليدوي لـ 13 لغة عالمية</p>
+          </div>
+        </div>
+        <button type="button" class="lang-modal-close" onclick="closeLangModal()">✕</button>
+      </div>
+
+      <div class="lang-grid" id="langGridContainer">
+        <!-- يتم ملء اللغات الـ 13 ديناميكياً -->
+      </div>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="badge-pill">
         <span class="pulse-dot"></span>
-        المقر الرقمي لتطبيقات المطور عبد المنعم مدكور • MADKOUR.tech
+        <span data-i18n="heroBadge">المقر الرقمي لتطبيقات المطور عبد المنعم مدكور • MADKOUR.tech</span>
       </div>
-      <h2 class="hero-title">
+      <h2 class="hero-title" data-i18n="heroTitle">
         حلول ذكية مقسمة حسب اهتماماتك<br>
         <span>تعليم • مالية • ذكاء اصطناعي • ألعاب</span>
       </h2>
-      <p class="hero-sub">
+      <p class="hero-sub" data-i18n="heroSub">
         تصفح تطبيقاتنا المعتمدة على Google Play مقسمة حسب الفئات لتصل لما تحتاجه بضغطة واحدة.
       </p>
     </div>
@@ -542,37 +776,37 @@
     
     <div class="filter-header">
       <div>
-        <h2 style="font-size: 26px; font-weight: 800; color: #fff;">أقسام التطبيقات (App Categories)</h2>
-        <p style="font-size: 14px; color: var(--text-muted);">اختر القسم المطلوب للتصفية الفورية:</p>
+        <h2 style="font-size: 26px; font-weight: 800; color: #fff;" data-i18n="categoriesTitle">أقسام التطبيقات (App Categories)</h2>
+        <p style="font-size: 14px; color: var(--text-muted);" data-i18n="categoriesSub">اختر القسم المطلوب للتصفية الفورية:</p>
       </div>
 
       <!-- Quick Search -->
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="appSearch" class="search-input" placeholder="ابحث باسم التطبيق أو الوظيفة..." oninput="handleSearch()">
+        <input type="text" id="appSearch" class="search-input" data-i18n-ph="searchPlaceholder" placeholder="ابحث باسم التطبيق أو الوظيفة..." oninput="handleSearch()">
       </div>
     </div>
 
     <!-- Category Filter Tabs -->
     <div class="category-tabs">
       <button class="cat-btn active" onclick="filterCategory('all', this)">
-        <span>🌟 الكل</span>
+        <span data-i18n="tabAll">🌟 الكل</span>
         <span class="cat-count" id="countAll">5</span>
       </button>
       <button class="cat-btn" onclick="filterCategory('edu', this)">
-        <span>🎓 تطبيقات تعليمية</span>
+        <span data-i18n="tabEdu">🎓 تطبيقات تعليمية</span>
         <span class="cat-count">1</span>
       </button>
       <button class="cat-btn" onclick="filterCategory('finance', this)">
-        <span>💰 تطبيقات مالية ومصاريف</span>
+        <span data-i18n="tabFinance">💰 تطبيقات مالية ومصاريف</span>
         <span class="cat-count">2</span>
       </button>
       <button class="cat-btn" onclick="filterCategory('ai', this)">
-        <span>🤖 ذكاء اصطناعي وأدوات</span>
+        <span data-i18n="tabAi">🤖 ذكاء اصطناعي وأدوات</span>
         <span class="cat-count">1</span>
       </button>
       <button class="cat-btn" onclick="filterCategory('games', this)">
-        <span>🎮 ألعاب وترفيه</span>
+        <span data-i18n="tabGames">🎮 ألعاب وترفيه</span>
         <span class="cat-count">1</span>
       </button>
     </div>
@@ -581,143 +815,118 @@
     <div class="apps-grid" id="appsContainer">
 
       <!-- App 1: Dars Khosousy (Edu) -->
-      <div class="app-card" data-cat="edu" data-title="درس خصوصي تعليم ذكاء اصطناعي مذاكرة أزهر ثانوية dars private tutor">
+      <div class="app-card" data-cat="edu" data-title="درس خصوصي تعليم ذكاء اصطناعي مذاكرة أزهر ثانوية dars khosousy private tutor ai homework school">
         <div>
           <div class="app-top">
             <div class="app-icon icon-dars">🎓</div>
             <div class="app-meta">
-              <h3>درس خصوصي (Private Tutor AI)</h3>
-              <span class="app-badge-cat">قسم: التطبيقات التعليمية</span>
+              <h3 data-i18n="darsTitle">درس خصوصي (Private Tutor AI)</h3>
+              <span class="app-badge-cat" data-i18n="darsCat">قسم: التطبيقات التعليمية</span>
             </div>
           </div>
-          <p class="app-desc">
+          <p class="app-desc" data-i18n="darsDesc">
             معلّمك الخصوصي الذكي لمناهج 17 دولة ومنظومة الأزهر الشريف بالكامل. يدعم حل المسائل بالكاميرا خطوة بخطوة بالذكاء الاصطناعي و9 لغات عالمية.
           </p>
-          <div class="app-tags">
-            <span class="tag">تعليمي</span>
-            <span class="tag">17 دولة</span>
-            <span class="tag">الأزهر الشريف</span>
-            <span class="tag">كاميرا وحل فوري</span>
-          </div>
+          <div class="app-tags" id="tagsDars"></div>
         </div>
         <div class="app-footer">
           <a href="#" class="btn-playstore">
-            <span>تحميل التطبيق</span>
-            <span>➔</span>
+            <span data-i18n="darsCta">تحميل التطبيق</span>
+            <span class="arrow-icon">➔</span>
           </a>
-          <a href="dars-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+          <a href="dars-privacy.html" class="link-privacy" data-i18n="privacyLink">سياسة الخصوصية</a>
         </div>
       </div>
 
       <!-- App 2: Ratbi (Finance) -->
-      <div class="app-card" data-cat="finance" data-title="راتبي مرتبات فلوس رواتب حساب الموظفين ratbi finance">
+      <div class="app-card" data-cat="finance" data-title="راتبي مرتبات فلوس رواتب حساب الموظفين ratbi salary payroll finance employee calculator">
         <div>
           <div class="app-top">
             <div class="app-icon icon-ratbi">💰</div>
             <div class="app-meta">
-              <h3>تطبيق راتبي (Ratbi)</h3>
-              <span class="app-badge-cat">قسم: التطبيقات المالية</span>
+              <h3 data-i18n="ratbiTitle">تطبيق راتبي (Ratbi)</h3>
+              <span class="app-badge-cat" data-i18n="ratbiCat">قسم: التطبيقات المالية</span>
             </div>
           </div>
-          <p class="app-desc">
+          <p class="app-desc" data-i18n="ratbiDesc">
             الحساب الذكي الدقيق للمرتبات والحوافز والبدلات، مع مؤقت تنازلي وتنبيهات مواعيد صرف الرواتب للموظفين وإدارة الالتزامات المالية.
           </p>
-          <div class="app-tags">
-            <span class="tag">مالي</span>
-            <span class="tag">حساب المرتبات</span>
-            <span class="tag">مواعيد الصرف</span>
-            <span class="tag">Google Play</span>
-          </div>
+          <div class="app-tags" id="tagsRatbi"></div>
         </div>
         <div class="app-footer">
           <a href="https://play.google.com/store/apps/details?id=com.ratbi.salaryapp" target="_blank" class="btn-playstore">
-            <span>Google Play (منشور)</span>
-            <span>➔</span>
+            <span data-i18n="ratbiCta">Google Play (منشور)</span>
+            <span class="arrow-icon">➔</span>
           </a>
-          <a href="ratbi-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+          <a href="ratbi-privacy.html" class="link-privacy" data-i18n="privacyLink">سياسة الخصوصية</a>
         </div>
       </div>
 
       <!-- App 3: Masareefi (Finance) -->
-      <div class="app-card" data-cat="finance" data-title="مصاريفي ميزانية مصاريف مصروف تتبع ادخار masareefi tracker">
+      <div class="app-card" data-cat="finance" data-title="مصاريفي ميزانية مصاريف مصروف تتبع ادخار masareefi tracker expense budget money savings">
         <div>
           <div class="app-top">
             <div class="app-icon icon-masareefi">📊</div>
             <div class="app-meta">
-              <h3>تطبيق مصاريفي (Masareefi)</h3>
-              <span class="app-badge-cat">قسم: التطبيقات المالية</span>
+              <h3 data-i18n="masareefiTitle">تطبيق مصاريفي (Masareefi)</h3>
+              <span class="app-badge-cat" data-i18n="masareefiCat">قسم: التطبيقات المالية</span>
             </div>
           </div>
-          <p class="app-desc">
+          <p class="app-desc" data-i18n="masareefiDesc">
             تتبع يومي للمصروفات وتقسيم الميزانية الشهرية في رسوم بيانية واضحة، لمساعدتك في التوفير والادخار وإدارة دخلك بذكاء.
           </p>
-          <div class="app-tags">
-            <span class="tag">مالي</span>
-            <span class="tag">إدارة الميزانية</span>
-            <span class="tag">تقارير بيانية</span>
-            <span class="tag">Google Play</span>
-          </div>
+          <div class="app-tags" id="tagsMasareefi"></div>
         </div>
         <div class="app-footer">
           <a href="https://play.google.com/store/apps/details?id=tech.madkour.masareefi" target="_blank" class="btn-playstore">
-            <span>Google Play (منشور)</span>
-            <span>➔</span>
+            <span data-i18n="masareefiCta">Google Play (منشور)</span>
+            <span class="arrow-icon">➔</span>
           </a>
-          <a href="masareefi-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+          <a href="masareefi-privacy.html" class="link-privacy" data-i18n="privacyLink">سياسة الخصوصية</a>
         </div>
       </div>
 
       <!-- App 4: Roboz AI (AI & Tools) -->
-      <div class="app-card" data-cat="ai" data-title="روبوز شات ذكاء اصطناعي روبوت كتابة ترجمة roboz ai chatbot">
+      <div class="app-card" data-cat="ai" data-title="روبوز شات ذكاء اصطناعي روبوت كتابة ترجمة roboz ai chatbot assistant translation code">
         <div>
           <div class="app-top">
             <div class="app-icon icon-roboz">🤖</div>
             <div class="app-meta">
-              <h3>روبوز (Roboz AI)</h3>
-              <span class="app-badge-cat">قسم: أدوات الذكاء الاصطناعي</span>
+              <h3 data-i18n="robozTitle">روبوز (Roboz AI)</h3>
+              <span class="app-badge-cat" data-i18n="robozCat">قسم: أدوات الذكاء الاصطناعي</span>
             </div>
           </div>
-          <p class="app-desc">
+          <p class="app-desc" data-i18n="robozDesc">
             مساعدك الشخصي الذكي للترجمة الفورية، صياغة الإيميلات الاحترافية، كتابة الأكواد، وتوليد الأفكار الإبداعية بسرعة وأمان.
           </p>
-          <div class="app-tags">
-            <span class="tag">ذكاء اصطناعي</span>
-            <span class="tag">شات ومساعد</span>
-            <span class="tag">برمجة ومحتوى</span>
-            <span class="tag">توليدي</span>
-          </div>
+          <div class="app-tags" id="tagsRoboz"></div>
         </div>
         <div class="app-footer">
           <a href="#" class="btn-playstore">
-            <span>صفحة المتجر</span>
-            <span>➔</span>
+            <span data-i18n="robozCta">صفحة المتجر</span>
+            <span class="arrow-icon">➔</span>
           </a>
-          <a href="roboz-privacy.html" class="link-privacy">سياسة الخصوصية</a>
+          <a href="roboz-privacy.html" class="link-privacy" data-i18n="privacyLink">سياسة الخصوصية</a>
         </div>
       </div>
 
       <!-- App 5: Games Teaser Card -->
-      <div class="app-card" data-cat="games" data-title="العاب العاب ذكاء تسلية ترفيه games puzzle">
+      <div class="app-card" data-cat="games" data-title="العاب العاب ذكاء تسلية ترفيه games puzzle casual fun brain challenges">
         <div>
           <div class="app-top">
             <div class="app-icon icon-games">🎮</div>
             <div class="app-meta">
-              <h3>ألعاب الذكاء والتسلية (Coming Soon)</h3>
-              <span class="app-badge-cat" style="color:#f59e0b;">قسم: الألعاب والترفيه</span>
+              <h3 data-i18n="gamesTitle">ألعاب الذكاء والتسلية (Coming Soon)</h3>
+              <span class="app-badge-cat" style="color:#f59e0b;" data-i18n="gamesCat">قسم: الألعاب والترفيه</span>
             </div>
           </div>
-          <p class="app-desc">
+          <p class="app-desc" data-i18n="gamesDesc">
             ألعاب تفاعلية مسلية وتحديات فكرية وألغاز ذكاء قادمة قريباً ومصممة لجميع الأعمار بجرافيك عالي الجودة وتجربة ممتعة خفيفة.
           </p>
-          <div class="app-tags">
-            <span class="tag">ألعاب</span>
-            <span class="tag">ألغاز وذكاء</span>
-            <span class="tag">تحديات يومية</span>
-            <span class="tag" style="color:#f59e0b; border-color: rgba(245, 158, 11, 0.3);">قريباً على المتجر</span>
-          </div>
+          <div class="app-tags" id="tagsGames"></div>
         </div>
         <div class="app-footer">
-          <span style="font-size:13px; font-weight:700; color:#f59e0b;">قيد التطوير والتجهيز ⏳</span>
+          <span style="font-size:13px; font-weight:700; color:#f59e0b;" data-i18n="gamesCta">قيد التطوير والتجهيز ⏳</span>
           <span class="link-privacy">MADKOUR Games</span>
         </div>
       </div>
@@ -729,8 +938,8 @@
   <section class="container" id="trust">
     <div class="trust-box">
       <div class="trust-content">
-        <h3>الامتثال والمعايير الرسمية لـ Google</h3>
-        <p>
+        <h3 data-i18n="trustTitle">الامتثال والمعايير الرسمية لـ Google</h3>
+        <p data-i18n="trustDesc">
           نلتزم في جميع تطبيقاتنا بأعلى معايير الأمان وحماية خصوصية المستخدم وسياسات Google Play Developer Program و AdMob Publisher Policies.
         </p>
         <div class="trust-badges">
@@ -743,13 +952,13 @@
 
       <div class="app-ads-card">
         <div class="app-ads-header">
-          <span>ملف الأمان الإعلاني (app-ads.txt)</span>
-          <span style="color:#10b981;">● نشط ومطابق</span>
+          <span data-i18n="appAdsHeader">ملف الأمان الإعلاني (app-ads.txt)</span>
+          <span style="color:#10b981;" data-i18n="appAdsStatus">● نشط ومطابق</span>
         </div>
         <div class="app-ads-code">
 google.com, pub-5678156801731088, DIRECT, f08c47fec0942fa0
         </div>
-        <a href="app-ads.txt" class="btn-view-ads">عرض الملف الحي على الرابط المباشر ➔</a>
+        <a href="app-ads.txt" class="btn-view-ads" data-i18n="appAdsBtn">عرض الملف الحي على الرابط المباشر ➔</a>
       </div>
     </div>
   </section>
@@ -762,25 +971,1237 @@ google.com, pub-5678156801731088, DIRECT, f08c47fec0942fa0
           <div class="brand-logo" style="width:36px; height:36px; font-size:18px;">M</div>
           <div class="brand-text">
             <h1 style="font-size:18px;">MADKOUR.tech</h1>
-            <span>Eng. Abdelmonem Madkour</span>
+            <span data-i18n="footerDev">Eng. Abdelmonem Madkour</span>
           </div>
         </div>
 
         <div class="footer-links">
-          <a href="#apps">تطبيقاتنا</a>
+          <a href="#apps" data-i18n="footerApps">تطبيقاتنا</a>
           <a href="app-ads.txt">app-ads.txt</a>
-          <a href="dars-privacy.html">سياسة الخصوصية</a>
-          <a href="mailto:abdelmonem.m.a.madkour@gmail.com">الدعم الفني</a>
+          <a href="dars-privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
+          <a href="mailto:abdelmonem.m.a.madkour@gmail.com" data-i18n="footerSupport">الدعم الفني</a>
         </div>
       </div>
 
-      <div class="copyright">
+      <div class="copyright" data-i18n="copyright">
         جميع الحقوق محفوظة © 2026 MADKOUR.tech • المطور عبد المنعم مدكور (abdelmonem.m.a.madkour@gmail.com)
       </div>
     </div>
   </footer>
 
   <script>
+    // =========================================================================
+    // قائمة اللغات الـ 13 المدعومة مع التفاصيل والاتجاه
+    // =========================================================================
+    const supportedLanguages = [
+      { code: 'ar', name: 'العربية', enName: 'Arabic', flag: '🇪🇬', dir: 'rtl' },
+      { code: 'en', name: 'English', enName: 'English', flag: '🇬🇧', dir: 'ltr' },
+      { code: 'fr', name: 'Français', enName: 'French', flag: '🇫🇷', dir: 'ltr' },
+      { code: 'de', name: 'Deutsch', enName: 'German', flag: '🇩🇪', dir: 'ltr' },
+      { code: 'es', name: 'Español', enName: 'Spanish', flag: '🇪🇸', dir: 'ltr' },
+      { code: 'it', name: 'Italiano', enName: 'Italian', flag: '🇮🇹', dir: 'ltr' },
+      { code: 'tr', name: 'Türkçe', enName: 'Turkish', flag: '🇹🇷', dir: 'ltr' },
+      { code: 'ru', name: 'Русский', enName: 'Russian', flag: '🇷🇺', dir: 'ltr' },
+      { code: 'ur', name: 'اردو', enName: 'Urdu', flag: '🇵🇰', dir: 'rtl' },
+      { code: 'zh', name: '简体中文', enName: 'Chinese (Simplified)', flag: '🇨🇳', dir: 'ltr' },
+      { code: 'hi', name: 'हिन्दी', enName: 'Hindi', flag: '🇮🇳', dir: 'ltr' },
+      { code: 'pt', name: 'Português', enName: 'Portuguese', flag: '🇧🇷', dir: 'ltr' },
+      { code: 'ja', name: '日本語', enName: 'Japanese', flag: '🇯🇵', dir: 'ltr' }
+    ];
+
+    const i18n = {
+  "ar": {
+    "pageTitle": "MADKOUR.tech | الموقع الرسمي للمطور عبد المنعم مدكور",
+    "brandSubtitle": "Official Developer Studio",
+    "navApps": "أقسام التطبيقات",
+    "navTrust": "الامتثال و AdMob",
+    "navContact": "الدعم والتواصل",
+    "contactBtn": "تواصل مع المطور ✉️",
+    "langModalTitle": "اختر لغة الموقع",
+    "langModalSub": "الموقع يدعم التحويل التلقائي واليدوي لـ 13 لغة عالمية",
+    "heroBadge": "المقر الرقمي لتطبيقات المطور عبد المنعم مدكور • MADKOUR.tech",
+    "heroTitle": "حلول ذكية مقسمة حسب اهتماماتك<br><span>تعليم • مالية • ذكاء اصطناعي • ألعاب</span>",
+    "heroSub": "تصفح تطبيقاتنا المعتمدة على Google Play مقسمة حسب الفئات لتصل لما تحتاجه بضغطة واحدة.",
+    "categoriesTitle": "أقسام التطبيقات (App Categories)",
+    "categoriesSub": "اختر القسم المطلوب للتصفية الفورية:",
+    "searchPlaceholder": "ابحث باسم التطبيق أو الوظيفة...",
+    "tabAll": "🌟 الكل",
+    "tabEdu": "🎓 تطبيقات تعليمية",
+    "tabFinance": "💰 تطبيقات مالية ومصاريف",
+    "tabAi": "🤖 ذكاء اصطناعي وأدوات",
+    "tabGames": "🎮 ألعاب وترفيه",
+    "darsTitle": "درس خصوصي (Private Tutor AI)",
+    "darsCat": "قسم: التطبيقات التعليمية",
+    "darsDesc": "معلّمك الخصوصي الذكي لمناهج 17 دولة ومنظومة الأزهر الشريف بالكامل. يدعم حل المسائل بالكاميرا خطوة بخطوة بالذكاء الاصطناعي و9 لغات عالمية.",
+    "darsTags": [
+      "تعليمي",
+      "17 دولة",
+      "الأزهر الشريف",
+      "كاميرا وحل فوري"
+    ],
+    "darsCta": "تحميل التطبيق",
+    "ratbiTitle": "تطبيق راتبي (Ratbi)",
+    "ratbiCat": "قسم: التطبيقات المالية",
+    "ratbiDesc": "الحساب الذكي الدقيق للمرتبات والحوافز والبدلات، مع مؤقت تنازلي وتنبيهات مواعيد صرف الرواتب للموظفين وإدارة الالتزامات المالية.",
+    "ratbiTags": [
+      "مالي",
+      "حساب المرتبات",
+      "مواعيد الصرف",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (منشور)",
+    "masareefiTitle": "تطبيق مصاريفي (Masareefi)",
+    "masareefiCat": "قسم: التطبيقات المالية",
+    "masareefiDesc": "تتبع يومي للمصروفات وتقسيم الميزانية الشهرية في رسوم بيانية واضحة، لمساعدتك في التوفير والادخار وإدارة دخلك بذكاء.",
+    "masareefiTags": [
+      "مالي",
+      "إدارة الميزانية",
+      "تقارير بيانية",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (منشور)",
+    "robozTitle": "روبوز (Roboz AI)",
+    "robozCat": "قسم: أدوات الذكاء الاصطناعي",
+    "robozDesc": "مساعدك الشخصي الذكي للترجمة الفورية، صياغة الإيميلات الاحترافية، كتابة الأكواد، وتوليد الأفكار الإبداعية بسرعة وأمان.",
+    "robozTags": [
+      "ذكاء اصطناعي",
+      "شات ومساعد",
+      "برمجة ومحتوى",
+      "توليدي"
+    ],
+    "robozCta": "صفحة المتجر",
+    "gamesTitle": "ألعاب الذكاء والتسلية (Coming Soon)",
+    "gamesCat": "قسم: الألعاب والترفيه",
+    "gamesDesc": "ألعاب تفاعلية مسلية وتحديات فكرية وألغاز ذكاء قادمة قريباً ومصممة لجميع الأعمار بجرافيك عالي الجودة وتجربة ممتعة خفيفة.",
+    "gamesTags": [
+      "ألعاب",
+      "ألغاز وذكاء",
+      "تحديات يومية",
+      "قريباً على المتجر"
+    ],
+    "gamesCta": "قيد التطوير والتجهيز ⏳",
+    "privacyLink": "سياسة الخصوصية",
+    "trustTitle": "الامتثال والمعايير الرسمية لـ Google",
+    "trustDesc": "نلتزم في جميع تطبيقاتنا بأعلى معايير الأمان وحماية خصوصية المستخدم وسياسات Google Play Developer Program و AdMob Publisher Policies.",
+    "appAdsHeader": "ملف الأمان الإعلاني (app-ads.txt)",
+    "appAdsStatus": "● نشط ومطابق",
+    "appAdsBtn": "عرض الملف الحي على الرابط المباشر ➔",
+    "footerDev": "المطور عبد المنعم مدكور",
+    "footerApps": "تطبيقاتنا",
+    "footerPrivacy": "سياسة الخصوصية",
+    "footerSupport": "الدعم الفني",
+    "copyright": "جميع الحقوق محفوظة © 2026 MADKOUR.tech • المطور عبد المنعم مدكور (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "en": {
+    "pageTitle": "MADKOUR.tech | Official Website of Eng. Abdelmonem Madkour",
+    "brandSubtitle": "Official Developer Studio",
+    "navApps": "App Categories",
+    "navTrust": "Compliance & AdMob",
+    "navContact": "Support & Contact",
+    "contactBtn": "Contact Developer ✉️",
+    "langModalTitle": "Choose Website Language",
+    "langModalSub": "Supports automatic browser detection & manual switching across 13 major languages",
+    "heroBadge": "Official Digital Hub for Eng. Abdelmonem Madkour • MADKOUR.tech",
+    "heroTitle": "Smart Solutions Built for Your Daily Needs<br><span>Education • Finance • AI Tools • Games</span>",
+    "heroSub": "Explore our Google Play verified applications categorized by your interests for instant access.",
+    "categoriesTitle": "App Categories & Ecosystem",
+    "categoriesSub": "Select a category for instant filtering:",
+    "searchPlaceholder": "Search apps by name, category, or keyword...",
+    "tabAll": "🌟 All",
+    "tabEdu": "🎓 Education",
+    "tabFinance": "💰 Finance & Salaries",
+    "tabAi": "🤖 AI & Tools",
+    "tabGames": "🎮 Games & Fun",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Category: Educational Apps",
+    "darsDesc": "Your smart personal AI tutor for official curricula across 17 countries and Al-Azhar. Supports instant step-by-step camera homework solutions in 9 world languages.",
+    "darsTags": [
+      "Education",
+      "17 Curricula",
+      "Al-Azhar",
+      "Instant Camera Solver"
+    ],
+    "darsCta": "Download App",
+    "ratbiTitle": "Ratbi: Salary & Payroll (راتبي)",
+    "ratbiCat": "Category: Finance & Salaries",
+    "ratbiDesc": "Precise payroll, allowance, and net salary calculator with live countdown timers and payday notifications for public and private sector employees.",
+    "ratbiTags": [
+      "Finance",
+      "Salary Calculator",
+      "Payday Alerts",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Live)",
+    "masareefiTitle": "Masareefi: Expense Tracker (مصاريفي)",
+    "masareefiCat": "Category: Personal Finance",
+    "masareefiDesc": "Daily expense tracking and monthly budget management visualized in clear interactive charts to help you save and master your personal finances.",
+    "masareefiTags": [
+      "Finance",
+      "Budget Planner",
+      "Analytics",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Live)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Category: AI & Productivity",
+    "robozDesc": "Your intelligent personal assistant for instant multi-language translation, professional drafting, code generation, and rapid creative brainstorming.",
+    "robozTags": [
+      "AI Assistant",
+      "Smart Chat",
+      "Coding & Copy",
+      "Generative AI"
+    ],
+    "robozCta": "Store Listing",
+    "gamesTitle": "Brain & Casual Games (Coming Soon)",
+    "gamesCat": "Category: Games & Entertainment",
+    "gamesDesc": "Engaging interactive casual challenges and mind puzzles coming soon, designed for all ages with smooth gameplay and crisp visuals.",
+    "gamesTags": [
+      "Casual Games",
+      "Brain Puzzles",
+      "Daily Challenges",
+      "Coming Soon"
+    ],
+    "gamesCta": "In Development ⏳",
+    "privacyLink": "Privacy Policy",
+    "trustTitle": "Google Official Compliance & Security Standards",
+    "trustDesc": "All published applications strictly adhere to the highest privacy standards, Google Play Developer Program policies, and AdMob Publisher guidelines.",
+    "appAdsHeader": "Authorized Digital Sellers (app-ads.txt)",
+    "appAdsStatus": "● Active & Verified",
+    "appAdsBtn": "View Raw Live File ➔",
+    "footerDev": "Eng. Abdelmonem Madkour",
+    "footerApps": "Our Applications",
+    "footerPrivacy": "Privacy Policy",
+    "footerSupport": "Technical Support",
+    "copyright": "All Rights Reserved © 2026 MADKOUR.tech • Eng. Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "fr": {
+    "pageTitle": "MADKOUR.tech | Site Officiel de l'Ing. Abdelmonem Madkour",
+    "brandSubtitle": "Studio Officiel de Développement",
+    "navApps": "Catégories d'applis",
+    "navTrust": "Conformité & AdMob",
+    "navContact": "Support & Contact",
+    "contactBtn": "Contacter le développeur ✉️",
+    "langModalTitle": "Choisir la langue du site",
+    "langModalSub": "Détection automatique et basculement instantané entre 13 langues mondiales",
+    "heroBadge": "Hub Officiel des Applications de l'Ing. Abdelmonem Madkour • MADKOUR.tech",
+    "heroTitle": "Des solutions intelligentes pour vos besoins<br><span>Éducation • Finance • Outils IA • Jeux</span>",
+    "heroSub": "Découvrez nos applications vérifiées sur Google Play, classées par centres d'intérêt pour un accès rapide.",
+    "categoriesTitle": "Catégories d'applications & Écosystème",
+    "categoriesSub": "Sélectionnez une catégorie pour filtrer instantanément :",
+    "searchPlaceholder": "Rechercher par nom, catégorie ou mot-clé...",
+    "tabAll": "🌟 Tous",
+    "tabEdu": "🎓 Éducation",
+    "tabFinance": "💰 Finance & Salaires",
+    "tabAi": "🤖 Outils d'IA",
+    "tabGames": "🎮 Jeux & Loisirs",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Catégorie : Applications éducatives",
+    "darsDesc": "Votre tuteur personnel IA couvrant les programmes scolaires officiels de 17 pays et d'Al-Azhar. Résolution de devoirs par caméra étape par étape en 9 langues.",
+    "darsTags": [
+      "Éducation",
+      "17 Programmes",
+      "Al-Azhar",
+      "Solveur Caméra Instantané"
+    ],
+    "darsCta": "Télécharger l'app",
+    "ratbiTitle": "Ratbi : Gestion des salaires (راتبي)",
+    "ratbiCat": "Catégorie : Finance & Salaires",
+    "ratbiDesc": "Calculateur intelligent et précis de salaires, primes et paie avec compte à rebours et alertes de dates de versement pour les employés.",
+    "ratbiTags": [
+      "Finance",
+      "Calcul de salaire",
+      "Alertes paie",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (En ligne)",
+    "masareefiTitle": "Masareefi : Suivi des dépenses (مصاريفي)",
+    "masareefiCat": "Catégorie : Finance personnelle",
+    "masareefiDesc": "Suivi quotidien des dépenses et gestion du budget mensuel visualisés sous forme de graphiques clairs pour vous aider à économiser.",
+    "masareefiTags": [
+      "Finance",
+      "Gestion de budget",
+      "Rapports visuels",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (En ligne)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Catégorie : IA & Productivité",
+    "robozDesc": "Votre assistant personnel intelligent pour la traduction instantanée, la rédaction d'e-mails professionnels, le code et la créativité.",
+    "robozTags": [
+      "Assistant IA",
+      "Chat intelligent",
+      "Code & Rédaction",
+      "IA Générative"
+    ],
+    "robozCta": "Fiche Play Store",
+    "gamesTitle": "Jeux de réflexion & Découverte (Coming Soon)",
+    "gamesCat": "Catégorie : Jeux & Divertissement",
+    "gamesDesc": "Jeux de logique et défis intellectuels interactifs bientôt disponibles, conçus pour tous les âges avec des graphismes soignés.",
+    "gamesTags": [
+      "Jeux Casual",
+      "Casse-tête",
+      "Défis quotidiens",
+      "Bientôt disponible"
+    ],
+    "gamesCta": "En cours de développement ⏳",
+    "privacyLink": "Politique de confidentialité",
+    "trustTitle": "Conformité et normes officielles de Google",
+    "trustDesc": "Toutes nos applications respectent scrupuleusement les exigences de confidentialité et les politiques de Google Play et AdMob.",
+    "appAdsHeader": "Fichier de sécurité publicitaire (app-ads.txt)",
+    "appAdsStatus": "● Actif & Conforme",
+    "appAdsBtn": "Consulter le fichier en direct ➔",
+    "footerDev": "Ing. Abdelmonem Madkour",
+    "footerApps": "Nos applications",
+    "footerPrivacy": "Politique de confidentialité",
+    "footerSupport": "Support technique",
+    "copyright": "Tous droits réservés © 2026 MADKOUR.tech • Ing. Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "de": {
+    "pageTitle": "MADKOUR.tech | Offizielle Website von Entwickler Abdelmonem Madkour",
+    "brandSubtitle": "Offizielles Entwicklerstudio",
+    "navApps": "App-Kategorien",
+    "navTrust": "Compliance & AdMob",
+    "navContact": "Support & Kontakt",
+    "contactBtn": "Entwickler kontaktieren ✉️",
+    "langModalTitle": "Website-Sprache wählen",
+    "langModalSub": "Automatische Erkennung und sofortiger Wechsel zwischen 13 Weltsprachen",
+    "heroBadge": "Offizieller Digital-Hub für Entwickler Abdelmonem Madkour • MADKOUR.tech",
+    "heroTitle": "Intelligente Lösungen für Ihren Alltag<br><span>Bildung • Finanzen • KI-Tools • Spiele</span>",
+    "heroSub": "Entdecken Sie unsere verifizierten Google Play-Apps, übersichtlich nach Kategorien sortiert.",
+    "categoriesTitle": "App-Kategorien & Ökosystem",
+    "categoriesSub": "Wählen Sie eine Kategorie zum sofortigen Filtern:",
+    "searchPlaceholder": "Nach App-Name, Kategorie oder Stichwort suchen...",
+    "tabAll": "🌟 Alle",
+    "tabEdu": "🎓 Bildung",
+    "tabFinance": "💰 Finanzen & Gehalt",
+    "tabAi": "🤖 KI & Werkzeuge",
+    "tabGames": "🎮 Spiele & Unterhaltung",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Kategorie: Bildungs-Apps",
+    "darsDesc": "Ihr persönlicher KI-Nachhilfelehrer für Lehrpläne in 17 Ländern und Al-Azhar. Unterstützt schrittweise Kamera-Aufgabenlösungen in 9 Sprachen.",
+    "darsTags": [
+      "Bildung",
+      "17 Lehrpläne",
+      "Al-Azhar",
+      "Kamera-Sofortlösung"
+    ],
+    "darsCta": "App herunterladen",
+    "ratbiTitle": "Ratbi: Gehalt & Bezüge (راتبي)",
+    "ratbiCat": "Kategorie: Finanzen & Gehälter",
+    "ratbiDesc": "Präziser Gehalts-, Zulagen- und Nettorechner mit Countdown-Timer und Benachrichtigungen zum Auszahlungstag für Arbeitnehmer.",
+    "ratbiTags": [
+      "Finanzen",
+      "Gehaltsrechner",
+      "Auszahlungsalarme",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Aktiv)",
+    "masareefiTitle": "Masareefi: Ausgaben-Tracker (مصاريفي)",
+    "masareefiCat": "Kategorie: Persönliche Finanzen",
+    "masareefiDesc": "Tägliche Ausgabenerfassung und monatliche Budgetverwaltung in klaren Grafiken zur finanziellen Übersicht.",
+    "masareefiTags": [
+      "Finanzen",
+      "Budgetplaner",
+      "Grafische Berichte",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Aktiv)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Kategorie: KI & Produktivität",
+    "robozDesc": "Ihr intelligenter KI-Assistent für Sofortübersetzung, professionelle E-Mails, Programmierung und Brainstorming.",
+    "robozTags": [
+      "KI-Assistent",
+      "Smarter Chat",
+      "Code & Text",
+      "Generative KI"
+    ],
+    "robozCta": "Play Store Seite",
+    "gamesTitle": "Denk- und Knobelspiele (Coming Soon)",
+    "gamesCat": "Kategorie: Spiele & Unterhaltung",
+    "gamesDesc": "Unterhaltsame Rätsel- und Logikspiele in Kürze verfügbar, für alle Altersgruppen mit ansprechender Grafik entwickelt.",
+    "gamesTags": [
+      "Casual Games",
+      "Denkspiele",
+      "Tägliche Aufgaben",
+      "Demnächst"
+    ],
+    "gamesCta": "In Entwicklung ⏳",
+    "privacyLink": "Datenschutzerklärung",
+    "trustTitle": "Google-Konformität und offizielle Sicherheitsstandards",
+    "trustDesc": "Alle Apps halten sich strikt an die Datenschutz- und Entwicklerrichtlinien von Google Play und AdMob.",
+    "appAdsHeader": "Werbesicherheitsdatei (app-ads.txt)",
+    "appAdsStatus": "● Aktiv & Validiert",
+    "appAdsBtn": "Live-Datei direkt anzeigen ➔",
+    "footerDev": "Entwickler Abdelmonem Madkour",
+    "footerApps": "Unsere Apps",
+    "footerPrivacy": "Datenschutzerklärung",
+    "footerSupport": "Technischer Support",
+    "copyright": "Alle Rechte vorbehalten © 2026 MADKOUR.tech • Entwickler Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "es": {
+    "pageTitle": "MADKOUR.tech | Sitio Oficial del Ing. Abdelmonem Madkour",
+    "brandSubtitle": "Estudio Oficial de Desarrollo",
+    "navApps": "Categorías de apps",
+    "navTrust": "Cumplimiento y AdMob",
+    "navContact": "Soporte y Contacto",
+    "contactBtn": "Contactar desarrollador ✉️",
+    "langModalTitle": "Seleccionar idioma del sitio",
+    "langModalSub": "Detección automática del navegador y cambio instantáneo entre 13 idiomas",
+    "heroBadge": "Hub Oficial de Aplicaciones del Ing. Abdelmonem Madkour • MADKOUR.tech",
+    "heroTitle": "Soluciones inteligentes para tu vida diaria<br><span>Educación • Finanzas • Herramientas IA • Juegos</span>",
+    "heroSub": "Explora nuestras aplicaciones verificadas en Google Play, organizadas por categorías de interés.",
+    "categoriesTitle": "Categorías de aplicaciones y Ecosistema",
+    "categoriesSub": "Selecciona una categoría para filtrar al instante:",
+    "searchPlaceholder": "Buscar por nombre de app, categoría o palabra clave...",
+    "tabAll": "🌟 Todos",
+    "tabEdu": "🎓 Educación",
+    "tabFinance": "💰 Finanzas y Salarios",
+    "tabAi": "🤖 IA y Herramientas",
+    "tabGames": "🎮 Juegos y Diversión",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Categoría: Aplicaciones Educativas",
+    "darsDesc": "Tu tutor personal con IA para planes de estudio de 17 países y Al-Azhar. Resuelve tareas paso a paso con cámara en 9 idiomas.",
+    "darsTags": [
+      "Educación",
+      "17 Currículos",
+      "Al-Azhar",
+      "Solución con Cámara"
+    ],
+    "darsCta": "Descargar App",
+    "ratbiTitle": "Ratbi: Sueldos y Nóminas (راتبي)",
+    "ratbiCat": "Categoría: Finanzas y Salarios",
+    "ratbiDesc": "Calculadora precisa de salarios, bonificaciones y nómina neta con cuenta regresiva y alertas del día de pago.",
+    "ratbiTags": [
+      "Finanzas",
+      "Cálculo de Sueldos",
+      "Alertas de Pago",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Publicado)",
+    "masareefiTitle": "Masareefi: Control de Gastos (مصاريفي)",
+    "masareefiCat": "Categoría: Finanzas Personales",
+    "masareefiDesc": "Seguimiento diario de gastos y presupuesto mensual con gráficos claros para ayudarte a ahorrar e invertir con inteligencia.",
+    "masareefiTags": [
+      "Finanzas",
+      "Presupuesto",
+      "Informes Visuales",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Publicado)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Categoría: IA y Productividad",
+    "robozDesc": "Tu asistente personal inteligente para traducción instantánea, redacción de correos, código y generación creativa.",
+    "robozTags": [
+      "Asistente IA",
+      "Chat Inteligente",
+      "Código y Texto",
+      "IA Generativa"
+    ],
+    "robozCta": "Ficha en Play Store",
+    "gamesTitle": "Juegos de Inteligencia y Puzles (Coming Soon)",
+    "gamesCat": "Categoría: Juegos y Entretenimiento",
+    "gamesDesc": "Juegos de lógica interactivos y desafíos mentales próximamente disponibles, diseñados para todas las edades.",
+    "gamesTags": [
+      "Juegos Casuales",
+      "Rompecabezas",
+      "Retos Diarios",
+      "Próximamente"
+    ],
+    "gamesCta": "En desarrollo ⏳",
+    "privacyLink": "Política de Privacidad",
+    "trustTitle": "Estándares y cumplimiento oficial de Google",
+    "trustDesc": "Todas las aplicaciones cumplen estrictamente las políticas de privacidad y los programas para desarrolladores de Google Play y AdMob.",
+    "appAdsHeader": "Archivo de seguridad publicitaria (app-ads.txt)",
+    "appAdsStatus": "● Activo y Verificado",
+    "appAdsBtn": "Ver archivo directo en vivo ➔",
+    "footerDev": "Ing. Abdelmonem Madkour",
+    "footerApps": "Nuestras Apps",
+    "footerPrivacy": "Política de Privacidad",
+    "footerSupport": "Soporte Técnico",
+    "copyright": "Todos los derechos reservados © 2026 MADKOUR.tech • Ing. Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "it": {
+    "pageTitle": "MADKOUR.tech | Sito Ufficiale dell'Ing. Abdelmonem Madkour",
+    "brandSubtitle": "Studio Ufficiale di Sviluppo",
+    "navApps": "Categorie di app",
+    "navTrust": "Conformità & AdMob",
+    "navContact": "Supporto e Contatti",
+    "contactBtn": "Contatta lo sviluppatore ✉️",
+    "langModalTitle": "Seleziona la lingua del sito",
+    "langModalSub": "Rilevamento automatico del browser e cambio rapido tra 13 lingue principali",
+    "heroBadge": "Hub Ufficiale delle App dell'Ing. Abdelmonem Madkour • MADKOUR.tech",
+    "heroTitle": "Soluzioni intelligenti per le tue esigenze<br><span>Istruzione • Finanza • Strumenti IA • Giochi</span>",
+    "heroSub": "Esplora le nostre applicazioni verificate su Google Play, suddivise per categoria di interesse.",
+    "categoriesTitle": "Categorie di applicazioni & Ecosistema",
+    "categoriesSub": "Seleziona una categoria per filtrare immediatamente:",
+    "searchPlaceholder": "Cerca app per nome, categoria o parola chiave...",
+    "tabAll": "🌟 Tutti",
+    "tabEdu": "🎓 Istruzione",
+    "tabFinance": "💰 Finanza e Stipendi",
+    "tabAi": "🤖 IA e Strumenti",
+    "tabGames": "🎮 Giochi e Svago",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Categoria: App Educative",
+    "darsDesc": "Il tuo tutor personale con IA per i programmi scolastici di 17 paesi e Al-Azhar. Risoluzione passo-passo con fotocamera in 9 lingue.",
+    "darsTags": [
+      "Istruzione",
+      "17 Programmi",
+      "Al-Azhar",
+      "Risolutore Fotocamera"
+    ],
+    "darsCta": "Scarica l'app",
+    "ratbiTitle": "Ratbi: Calcolo Stipendi (راتبي)",
+    "ratbiCat": "Categoria: Finanza e Stipendi",
+    "ratbiDesc": "Calcolatore preciso di stipendi, indennità e busta paga con timer e notifiche della data di accredito.",
+    "ratbiTags": [
+      "Finanza",
+      "Calcolo Stipendio",
+      "Avvisi accredito",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Pubblicato)",
+    "masareefiTitle": "Masareefi: Monitor Spese (مصاريفي)",
+    "masareefiCat": "Categoria: Finanza Personale",
+    "masareefiDesc": "Tracciamento quotidiano delle spese e gestione del budget mensile con grafici chiari per risparmiare.",
+    "masareefiTags": [
+      "Finanza",
+      "Gestione Budget",
+      "Report Grafici",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Pubblicato)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Categoria: IA & Produttività",
+    "robozDesc": "Il tuo assistente personale intelligente per traduzioni istantanee, email professionali, codice e idee.",
+    "robozTags": [
+      "Assistente IA",
+      "Chat Intelligente",
+      "Codice e Testi",
+      "IA Generativa"
+    ],
+    "robozCta": "Scheda Play Store",
+    "gamesTitle": "Giochi di Logica e Puzzle (Coming Soon)",
+    "gamesCat": "Categoria: Giochi e Intrattenimento",
+    "gamesDesc": "Sfide intellettuali e puzzle interattivi in arrivo, progettati per tutte le età con grafica curata.",
+    "gamesTags": [
+      "Casual Games",
+      "Rompicapo",
+      "Sfide Giornaliere",
+      "In arrivo"
+    ],
+    "gamesCta": "In sviluppo ⏳",
+    "privacyLink": "Informativa sulla Privacy",
+    "trustTitle": "Conformità ufficiale e standard di sicurezza Google",
+    "trustDesc": "Tutte le applicazioni rispettano rigorosamente le norme di privacy e i programmi Google Play e AdMob.",
+    "appAdsHeader": "File di sicurezza pubblicitaria (app-ads.txt)",
+    "appAdsStatus": "● Attivo e Validato",
+    "appAdsBtn": "Visualizza file live ➔",
+    "footerDev": "Ing. Abdelmonem Madkour",
+    "footerApps": "Le nostre app",
+    "footerPrivacy": "Informativa sulla Privacy",
+    "footerSupport": "Supporto Tecnico",
+    "copyright": "Tutti i diritti riservati © 2026 MADKOUR.tech • Ing. Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "tr": {
+    "pageTitle": "MADKOUR.tech | Müh. Abdelmonem Madkour Resmi Web Sitesi",
+    "brandSubtitle": "Resmi Geliştirici Stüdyosu",
+    "navApps": "Uygulama Kategorileri",
+    "navTrust": "Uyumluluk ve AdMob",
+    "navContact": "Destek ve İletişim",
+    "contactBtn": "Geliştiriciyle İletişim ✉️",
+    "langModalTitle": "Web Sitesi Dilini Seçin",
+    "langModalSub": "Tarayıcı dilini otomatik algılama ve 13 dünya dilinde anında geçiş desteği",
+    "heroBadge": "Müh. Abdelmonem Madkour Resmi Uygulama Merkezi • MADKOUR.tech",
+    "heroTitle": "Günlük İhtiyaçlarınız İçin Akıllı Çözümler<br><span>Eğitim • Finans • Yapay Zekâ • Oyunlar</span>",
+    "heroSub": "Google Play onaylı uygulamalarımızı ilgi alanlarınıza göre kategorize edilmiş olarak hemen keşfedin.",
+    "categoriesTitle": "Uygulama Kategorileri & Ekosistem",
+    "categoriesSub": "Anında filtrelemek için bir kategori seçin:",
+    "searchPlaceholder": "Uygulama adı, kategori veya anahtar kelime ara...",
+    "tabAll": "🌟 Tümü",
+    "tabEdu": "🎓 Eğitim",
+    "tabFinance": "💰 Finans ve Maaş",
+    "tabAi": "🤖 Yapay Zekâ & Araçlar",
+    "tabGames": "🎮 Oyun ve Eğlence",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Kategori: Eğitim Uygulamaları",
+    "darsDesc": "17 ülke ve El-Ezher müfredatını kapsayan kişisel yapay zekâ özel ders öğretmeniniz. 9 dilde kameralı soru çözümü.",
+    "darsTags": [
+      "Eğitim",
+      "17 Müfredat",
+      "El-Ezher",
+      "Kameralı Çözüm"
+    ],
+    "darsCta": "Uygulamayı İndir",
+    "ratbiTitle": "Ratbi: Maaş ve Bordro (راتبي)",
+    "ratbiCat": "Kategori: Finans ve Maaşlar",
+    "ratbiDesc": "Geri sayım sayacı ve maaş günü bildirimleriyle maaş, ikramiye ve net bordro hesaplayıcısı.",
+    "ratbiTags": [
+      "Finans",
+      "Maaş Hesaplama",
+      "Ödeme Bildirimleri",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Yayında)",
+    "masareefiTitle": "Masareefi: Gider Takibi (مصاريفي)",
+    "masareefiCat": "Kategori: Kişisel Finans",
+    "masareefiDesc": "Net grafiklerle günlük harcama takibi ve aylık bütçe yönetimi sağlayarak tasarruf etmenize yardımcı olur.",
+    "masareefiTags": [
+      "Finans",
+      "Bütçe Planlayıcı",
+      "Grafik Raporlar",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Yayında)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Kategori: Yapay Zekâ & Verimlilik",
+    "robozDesc": "Anında çeviri, profesyonel e-posta yazımı, kod üretimi ve yaratıcı fikirler için akıllı kişisel asistanınız.",
+    "robozTags": [
+      "Yapay Zekâ Asistanı",
+      "Akıllı Sohbet",
+      "Kod ve Metin",
+      "Üretken Yapay Zekâ"
+    ],
+    "robozCta": "Mağaza Sayfası",
+    "gamesTitle": "Zekâ ve Bulmaca Oyunları (Coming Soon)",
+    "gamesCat": "Kategori: Oyun ve Eğlence",
+    "gamesDesc": "Her yaşa uygun kaliteli grafiklere sahip eğlenceli zekâ oyunları ve bulmacalar çok yakında sizlerle.",
+    "gamesTags": [
+      "Gündelik Oyunlar",
+      "Zekâ Bulmacaları",
+      "Günlük Görevler",
+      "Çok Yakında"
+    ],
+    "gamesCta": "Geliştiriliyor ⏳",
+    "privacyLink": "Gizlilik Politikası",
+    "trustTitle": "Google Resmi Uyumluluk ve Güvenlik Standartları",
+    "trustDesc": "Tüm uygulamalarımız Google Play Geliştirici ve AdMob yayıncı politikalarına ve gizlilik kurallarına tam uyar.",
+    "appAdsHeader": "Reklam Güvenlik Dosyası (app-ads.txt)",
+    "appAdsStatus": "● Aktif & Doğrulandı",
+    "appAdsBtn": "Canlı Dosyayı Görüntüle ➔",
+    "footerDev": "Müh. Abdelmonem Madkour",
+    "footerApps": "Uygulamalarımız",
+    "footerPrivacy": "Gizlilik Politikası",
+    "footerSupport": "Teknik Destek",
+    "copyright": "Tüm hakları saklıdır © 2026 MADKOUR.tech • Müh. Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "ru": {
+    "pageTitle": "MADKOUR.tech | Официальный сайт инженера Абдельмонема Мадкури",
+    "brandSubtitle": "Официальная студия разработки",
+    "navApps": "Категории приложений",
+    "navTrust": "Соответствие и AdMob",
+    "navContact": "Поддержка и контакты",
+    "contactBtn": "Связаться с разработчиком ✉️",
+    "langModalTitle": "Выберите язык сайта",
+    "langModalSub": "Автоматическое определение языка браузера и мгновенное переключение между 13 языками",
+    "heroBadge": "Официальный центр приложений инженера Абдельмонема Мадкури • MADKOUR.tech",
+    "heroTitle": "Умные решения для повседневных задач<br><span>Образование • Финансы • ИИ-инструменты • Игры</span>",
+    "heroSub": "Ознакомьтесь с проверенными приложениями в Google Play, отсортированными по категориям.",
+    "categoriesTitle": "Категории приложений и Экосистема",
+    "categoriesSub": "Выберите категорию для быстрой фильтрации:",
+    "searchPlaceholder": "Поиск приложения по названию, категории или ключу...",
+    "tabAll": "🌟 Все",
+    "tabEdu": "🎓 Образование",
+    "tabFinance": "💰 Финансы и зарплаты",
+    "tabAi": "🤖 ИИ и инструменты",
+    "tabGames": "🎮 Игры и развлечения",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Категория: Образовательные приложения",
+    "darsDesc": "Ваш умный ИИ-репетитор по школьным программам 17 стран и Аль-Азхар. Пошаговое решение задач по фото на 9 языках.",
+    "darsTags": [
+      "Образование",
+      "17 Программ",
+      "Аль-Азхар",
+      "Решение по фото"
+    ],
+    "darsCta": "Скачать приложение",
+    "ratbiTitle": "Ratbi: Расчет зарплаты (راتبي)",
+    "ratbiCat": "Категория: Финансы и зарплаты",
+    "ratbiDesc": "Точный калькулятор зарплат, премий и окладов с таймером обратного отсчета и уведомлениями о дне выплаты.",
+    "ratbiTags": [
+      "Финансы",
+      "Расчет зарплаты",
+      "Оповещения",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Опубликовано)",
+    "masareefiTitle": "Masareefi: Учет расходов (مصاريفي)",
+    "masareefiCat": "Категория: Личные финансы",
+    "masareefiDesc": "Ежедневный учет расходов и управление ежемесячным бюджетом с наглядными графиками для накоплений.",
+    "masareefiTags": [
+      "Финансы",
+      "Планировщик бюджета",
+      "Графики",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Опубликовано)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Категория: ИИ и продуктивность",
+    "robozDesc": "Ваш умный персональный помощник для мгновенного перевода, деловой переписки, кода и генерации идей.",
+    "robozTags": [
+      "ИИ-помощник",
+      "Умный чат",
+      "Код и тексты",
+      "Генеративный ИИ"
+    ],
+    "robozCta": "Страница в магазине",
+    "gamesTitle": "Игры на логику и головоломки (Coming Soon)",
+    "gamesCat": "Категория: Игры и развлечения",
+    "gamesDesc": "Увлекательные интеллектуальные головоломки для всех возрастов с отличной графикой скоро будут доступны.",
+    "gamesTags": [
+      "Казуальные игры",
+      "Головоломки",
+      "Ежедневные квесты",
+      "Скоро"
+    ],
+    "gamesCta": "В разработке ⏳",
+    "privacyLink": "Политика конфиденциальности",
+    "trustTitle": "Официальное соответствие стандартам Google",
+    "trustDesc": "Все приложения строго соответствуют требованиям конфиденциальности и стандартам Google Play и AdMob.",
+    "appAdsHeader": "Файл безопасности рекламы (app-ads.txt)",
+    "appAdsStatus": "● Активен и проверен",
+    "appAdsBtn": "Открыть прямой файл ➔",
+    "footerDev": "Инженер Абдельмонем Мадкур",
+    "footerApps": "Наши приложения",
+    "footerPrivacy": "Политика конфиденциальности",
+    "footerSupport": "Техническая поддержка",
+    "copyright": "Все права защищены © 2026 MADKOUR.tech • Инженер Абдельмонем Мадкур (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "ur": {
+    "pageTitle": "MADKOUR.tech | انجینئر عبدالمنعم مدکور کی باضابطہ ویب سائٹ",
+    "brandSubtitle": "آفیشل ڈویلپر اسٹوڈیو",
+    "navApps": "ایپس کے زمرے",
+    "navTrust": "مطابقت اور ایڈموب",
+    "navContact": "سپورٹ اور رابطہ",
+    "contactBtn": "ڈویلپر سے رابطہ کریں ✉️",
+    "langModalTitle": "ویب سائٹ کی زبان منتخب کریں",
+    "langModalSub": "براؤزر کی زبان کی خودکار شناخت اور 13 اہم زبانوں میں فوری تبدیلی",
+    "heroBadge": "انجینئر عبدالمنعم مدکور کا آفیشل ڈیجیٹل ہب • MADKOUR.tech",
+    "heroTitle": "آپ کی روزمرہ ضروریات کے لیے سمارٹ حل<br><span>تعلیم • مالیات • مصنوعی ذہانت • گیمز</span>",
+    "heroSub": "گوگل پلے سے تصدیق شدہ ہماری ایپس دیکھیں جنہیں آپ کی سہولت کے لیے زمروں میں تقسیم کیا گیا ہے۔",
+    "categoriesTitle": "ایپ کیٹیگریز اور ایکو سسٹم",
+    "categoriesSub": "فوری فلٹر کے لیے کیٹیگری منتخب کریں:",
+    "searchPlaceholder": "نام، زمرہ یا کی ورڈ سے ایپ تلاش کریں...",
+    "tabAll": "🌟 تمام",
+    "tabEdu": "🎓 تعلیم",
+    "tabFinance": "💰 مالیات اور تنخواہ",
+    "tabAi": "🤖 مصنوعی ذہانت",
+    "tabGames": "🎮 گیمز اور تفریح",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "زمرہ: تعلیمی ایپلی کیشنز",
+    "darsDesc": "17 ممالک کے نصاب اور جامعہ الازہر کے لیے آپ کا سمارٹ ذاتی ٹیوٹر۔ 9 زبانوں میں کیمرے سے سوالات کا فوری حل۔",
+    "darsTags": [
+      "تعلیم",
+      "17 نصاب",
+      "الازہر شریف",
+      "کیمرہ ہوم ورک حل"
+    ],
+    "darsCta": "ایپ ڈاؤن لوڈ کریں",
+    "ratbiTitle": "Ratbi: تنخواہ اور حساب کتاب (راتبي)",
+    "ratbiCat": "زمرہ: مالیات اور تنخواہیں",
+    "ratbiDesc": "ملازمین کے لیے الاؤنسز اور نیٹ تنخواہ کا درست کیلکولیٹر بمعہ الٹی گنتی اور تنخواہ کے دن کے الرٹس۔",
+    "ratbiTags": [
+      "مالیات",
+      "تنخواہ کیلکولیٹر",
+      "تنخواہ الرٹس",
+      "گوگل پلے"
+    ],
+    "ratbiCta": "گوگل پلے (لائیو)",
+    "masareefiTitle": "Masareefi: اخراجات کا ٹریکر (مصاريفي)",
+    "masareefiCat": "زمرہ: ذاتی مالیات",
+    "masareefiDesc": "روزمرہ کے اخراجات اور ماہانہ بجٹ کا آسان گرافس کے ساتھ حساب تاکہ آپ بچت اور انتظام بہتر کر سکیں۔",
+    "masareefiTags": [
+      "مالیات",
+      "بجٹ پلانر",
+      "گراف رپورٹس",
+      "گوگل پلے"
+    ],
+    "masareefiCta": "گوگل پلے (لائیو)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "زمرہ: مصنوعی ذہانت اور پیداواری صلاحیت",
+    "robozDesc": "فوری کثیر لسانی ترجمہ، پیشہ ورانہ ای میلز، کوڈنگ اور تخلیقی آئیڈیاز کے لیے آپ کا سمارٹ اسسٹنٹ۔",
+    "robozTags": [
+      "اے آئی اسسٹنٹ",
+      "سمارٹ چیٹ",
+      "کوڈ اور مواد",
+      "جنریٹو اے آئی"
+    ],
+    "robozCta": "پلے اسٹور صفحہ",
+    "gamesTitle": "دماغی گیمز اور پزل (Coming Soon)",
+    "gamesCat": "زمرہ: کھیل اور تفریح",
+    "gamesDesc": "تمام عمر کے افراد کے لیے خوبصورت گرافکس کے ساتھ دلچسپ دماغی پزلز اور چیلنجز جلد دستیاب ہوں گے۔",
+    "gamesTags": [
+      "آسان گیمز",
+      "دماغی پزلز",
+      "روزانہ چیلنجز",
+      "جلد آرہا ہے"
+    ],
+    "gamesCta": "زیر تکمیل ⏳",
+    "privacyLink": "رازداری کی پالیسی",
+    "trustTitle": "گوگل کے آفیشل معیارات اور مطابقت",
+    "trustDesc": "ہماری تمام ایپلی کیشنز گوگل پلے اور ایڈموب کے اعلیٰ سیکیورٹی اور رازداری کے ضوابط پر سختی سے عمل کرتی ہیں۔",
+    "appAdsHeader": "اشتہاری سیکیورٹی فائل (app-ads.txt)",
+    "appAdsStatus": "● فعال اور تصدیق شدہ",
+    "appAdsBtn": "براہ راست لائیو فائل دیکھیں ➔",
+    "footerDev": "انجینئر عبدالمنعم مدکور",
+    "footerApps": "ہماری ایپس",
+    "footerPrivacy": "پرائیویسی پالیسی",
+    "footerSupport": "تکنیکی مدد",
+    "copyright": "جملہ حقوق محفوظ ہیں © 2026 MADKOUR.tech • انجینئر عبدالمنعم مدکور (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "zh": {
+    "pageTitle": "MADKOUR.tech | 阿卜杜勒莫内姆·马德库尔工程师官方网站",
+    "brandSubtitle": "官方开发者工作室",
+    "navApps": "应用分类",
+    "navTrust": "合规与 AdMob",
+    "navContact": "支持与联系",
+    "contactBtn": "联系开发者 ✉️",
+    "langModalTitle": "选择网站语言",
+    "langModalSub": "支持浏览器语言自动识别及 13 种主要语言即时切换",
+    "heroBadge": "阿卜杜勒莫内姆·马德库尔工程师官方数字中心 • MADKOUR.tech",
+    "heroTitle": "满足您日常需求的智能解决方案<br><span>教育 • 财务 • 人工智能 • 游戏</span>",
+    "heroSub": "浏览我们在 Google Play 上经过验证的应用，按兴趣分类以便即时访问。",
+    "categoriesTitle": "应用分类与生态系统",
+    "categoriesSub": "选择分类以进行即时筛选：",
+    "searchPlaceholder": "按应用名称、分类或关键词搜索...",
+    "tabAll": "🌟 全部",
+    "tabEdu": "🎓 教育",
+    "tabFinance": "💰 财务与薪酬",
+    "tabAi": "🤖 人工智能工具",
+    "tabGames": "🎮 游戏与休闲",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "分类：教育类应用",
+    "darsDesc": "覆盖 17 国官方课程及爱资哈尔体系的智能个人 AI 辅导导师。支持 9 种语言拍照解题及详细步骤分析。",
+    "darsTags": [
+      "教育",
+      "17 国课程",
+      "爱资哈尔",
+      "拍照即刻解题"
+    ],
+    "darsCta": "下载应用",
+    "ratbiTitle": "Ratbi: 薪资与考勤管理 (راتبي)",
+    "ratbiCat": "分类：财务与薪资",
+    "ratbiDesc": "精确的员工工资、津贴及净收入计算器，附带发薪日倒计时和准时到账通知。",
+    "ratbiTags": [
+      "财务",
+      "工资计算",
+      "发薪日提醒",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (已发布)",
+    "masareefiTitle": "Masareefi: 记账与支出管理 (مصاريفي)",
+    "masareefiCat": "分类：个人财务",
+    "masareefiDesc": "日常支出跟踪与每月预算规划，通过直观的统计图表助您智慧理财与储蓄。",
+    "masareefiTags": [
+      "财务",
+      "预算规划",
+      "图表报告",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (已发布)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "分类：人工智能与效率",
+    "robozDesc": "用于即时多语言翻译、商务邮件起草、代码编写及创意发散的智能生产力伴侣。",
+    "robozTags": [
+      "AI 助手",
+      "智能对话",
+      "代码与文案",
+      "生成式 AI"
+    ],
+    "robozCta": "应用商店页面",
+    "gamesTitle": "益智与休闲游戏 (Coming Soon)",
+    "gamesCat": "分类：游戏与娱乐",
+    "gamesDesc": "即将上线的互动益智与脑力挑战游戏，拥有精美视觉效果，老少咸宜。",
+    "gamesTags": [
+      "休闲游戏",
+      "脑力益智",
+      "每日挑战",
+      "即将推出"
+    ],
+    "gamesCta": "开发制作中 ⏳",
+    "privacyLink": "隐私政策",
+    "trustTitle": "Google 官方合规与安全标准",
+    "trustDesc": "所有发布的应用均严格遵守 Google Play 开发者计划和 AdMob 发布商政策与隐私规范。",
+    "appAdsHeader": "广告授权安全文件 (app-ads.txt)",
+    "appAdsStatus": "● 激活且有效",
+    "appAdsBtn": "查看在线原始文件 ➔",
+    "footerDev": "阿卜杜勒莫内姆·马德库尔工程师",
+    "footerApps": "我们的应用",
+    "footerPrivacy": "隐私政策",
+    "footerSupport": "技术支持",
+    "copyright": "版权所有 © 2026 MADKOUR.tech • 阿卜杜勒莫内姆·马德库尔 (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "hi": {
+    "pageTitle": "MADKOUR.tech | इंजीनियर अब्दुलमोनेम मदकूर की आधिकारिक वेबसाइट",
+    "brandSubtitle": "आधिकारिक डेवलपर स्टूडियो",
+    "navApps": "ऐप श्रेणियां",
+    "navTrust": "अनुपालन और AdMob",
+    "navContact": "समर्थन और संपर्क",
+    "contactBtn": "डेवलपर से संपर्क करें ✉️",
+    "langModalTitle": "वेबसाइट की भाषा चुनें",
+    "langModalSub": "ब्राउज़र भाषा का स्वतः पता लगाने और 13 प्रमुख भाषाओं में तुरंत बदलने की सुविधा",
+    "heroBadge": "इंजीनियर अब्दुलमोनेम मदकूर का आधिकारिक डिजिटल हब • MADKOUR.tech",
+    "heroTitle": "आपकी दैनिक ज़रूरतों के लिए स्मार्ट समाधान<br><span>शिक्षा • वित्त • एआई टूल्स • गेम्स</span>",
+    "heroSub": "Google Play द्वारा सत्यापित हमारे ऐप्स को अपनी पसंद की श्रेणियों के अनुसार आसानी से देखें।",
+    "categoriesTitle": "ऐप श्रेणियां और इकोसिस्टम",
+    "categoriesSub": "तुरंत फ़िल्टर करने के लिए श्रेणी चुनें:",
+    "searchPlaceholder": "नाम, श्रेणी या कीवर्ड से ऐप खोजें...",
+    "tabAll": "🌟 सभी",
+    "tabEdu": "🎓 शिक्षा",
+    "tabFinance": "💰 वित्त और वेतन",
+    "tabAi": "🤖 एआई टूल्स",
+    "tabGames": "🎮 खेल और मनोरंजन",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "श्रेणी: शैक्षणिक ऐप्स",
+    "darsDesc": "17 देशों के पाठ्यक्रम और अल-अजहर के लिए आपका स्मार्ट व्यक्तिगत एआई ट्यूटर। 9 भाषाओं में कैमरे से चरण-दर-चरण समाधान।",
+    "darsTags": [
+      "शिक्षा",
+      "17 पाठ्यक्रम",
+      "अल-अजहर",
+      "कैमरा समाधान"
+    ],
+    "darsCta": "ऐप डाउनलोड करें",
+    "ratbiTitle": "Ratbi: वेतन और पेरोल (راتبي)",
+    "ratbiCat": "श्रेणी: वित्त और वेतन",
+    "ratbiDesc": "कर्मचारियों के लिए भत्ते और शुद्ध वेतन की सटीक गणना, काउंटडाउन टाइमर और वेतन दिवस अलर्ट के साथ।",
+    "ratbiTags": [
+      "वित्त",
+      "वेतन कैलकुलेटर",
+      "वेतन अलर्ट",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (लाइव)",
+    "masareefiTitle": "Masareefi: व्यय ट्रैकर (مصاريفي)",
+    "masareefiCat": "श्रेणी: व्यक्तिगत वित्त",
+    "masareefiDesc": "दैनिक खर्चों पर नज़र रखें और स्पष्ट चार्ट के साथ मासिक बजट प्रबंधित करें ताकि बचत आसान हो सके।",
+    "masareefiTags": [
+      "वित्त",
+      "बजट योजनाकार",
+      "चार्ट रिपोर्ट",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (लाइव)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "श्रेणी: एआई और उत्पादकता",
+    "robozDesc": "त्वरित बहुभाषी अनुवाद, पेशेवर ईमेल, कोडिंग और रचनात्मक विचारों के लिए आपका स्मार्ट सहायक।",
+    "robozTags": [
+      "एआई सहायक",
+      "स्मार्ट चैट",
+      "कोड और लेखन",
+      "जनरेटिव एआई"
+    ],
+    "robozCta": "प्ले स्टोर पेज",
+    "gamesTitle": "दिमागी और पहेली खेल (Coming Soon)",
+    "gamesCat": "श्रेणी: खेल और मनोरंजन",
+    "gamesDesc": "सभी उम्र के लिए आकर्षक ग्राफिक्स के साथ रोमांचक पहेलियाँ और दिमागी खेल जल्द ही उपलब्ध होंगे।",
+    "gamesTags": [
+      "आसान खेल",
+      "दिमागी पहेलियां",
+      "दैनिक चुनौतियां",
+      "जल्द आ रहा है"
+    ],
+    "gamesCta": "विकास में ⏳",
+    "privacyLink": "गोपनीयता नीति",
+    "trustTitle": "Google आधिकारिक अनुपालन और सुरक्षा मानक",
+    "trustDesc": "हमारे सभी ऐप्स Google Play और AdMob के उच्चतम सुरक्षा और गोपनीयता मानकों का पालन करते हैं।",
+    "appAdsHeader": "विज्ञापन सुरक्षा फ़ाइल (app-ads.txt)",
+    "appAdsStatus": "● सक्रिय और सत्यापित",
+    "appAdsBtn": "सीधी लाइव फ़ाइल देखें ➔",
+    "footerDev": "इंजीनियर अब्दुलमोनेम मदकूर",
+    "footerApps": "हमारे ऐप्स",
+    "footerPrivacy": "गोपनीयता नीति",
+    "footerSupport": "तकनीकी सहायता",
+    "copyright": "सर्वाधिकार सुरक्षित © 2026 MADKOUR.tech • इंजीनियर अब्दुलमोनेम मदकूर (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "pt": {
+    "pageTitle": "MADKOUR.tech | Site Oficial do Eng. Abdelmonem Madkour",
+    "brandSubtitle": "Estúdio Oficial de Desenvolvimento",
+    "navApps": "Categorias de apps",
+    "navTrust": "Conformidade e AdMob",
+    "navContact": "Suporte e Contato",
+    "contactBtn": "Contatar desenvolvedor ✉️",
+    "langModalTitle": "Escolha o idioma do site",
+    "langModalSub": "Detecção automática de idioma do navegador e troca rápida entre 13 idiomas",
+    "heroBadge": "Hub Oficial de Aplicativos do Eng. Abdelmonem Madkour • MADKOUR.tech",
+    "heroTitle": "Soluções inteligentes para seu dia a dia<br><span>Educação • Finanças • Ferramentas de IA • Jogos</span>",
+    "heroSub": "Explore nossos aplicativos verificados no Google Play, organizados por categorias para acesso rápido.",
+    "categoriesTitle": "Categorias de aplicativos e Ecossistema",
+    "categoriesSub": "Selecione uma categoria para filtrar:",
+    "searchPlaceholder": "Buscar por nome do app, categoria ou palavra-chave...",
+    "tabAll": "🌟 Todos",
+    "tabEdu": "🎓 Educação",
+    "tabFinance": "💰 Finanças e Salários",
+    "tabAi": "🤖 IA e Ferramentas",
+    "tabGames": "🎮 Jogos e Diversão",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "Categoria: Aplicativos Educacionais",
+    "darsDesc": "Seu professor particular com IA para currículos de 17 países e Al-Azhar. Resolução de tarefas passo a passo por câmera em 9 idiomas.",
+    "darsTags": [
+      "Educação",
+      "17 Currículos",
+      "Al-Azhar",
+      "Solução por Câmera"
+    ],
+    "darsCta": "Baixar aplicativo",
+    "ratbiTitle": "Ratbi: Salários e Folha (راتبي)",
+    "ratbiCat": "Categoria: Finanças e Salários",
+    "ratbiDesc": "Calculadora precisa de salários, benefícios e folha líquida com contador regressivo e alertas de dia de pagamento.",
+    "ratbiTags": [
+      "Finanças",
+      "Cálculo Salarial",
+      "Alertas de Pagamento",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (Publicado)",
+    "masareefiTitle": "Masareefi: Controle de Despesas (مصاريفي)",
+    "masareefiCat": "Categoria: Finanças Pessoais",
+    "masareefiDesc": "Acompanhamento diário de gastos e orçamento mensal com gráficos intuitivos para ajudar você a poupar.",
+    "masareefiTags": [
+      "Finanças",
+      "Planejamento de Gastos",
+      "Relatórios Visuais",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (Publicado)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "Categoria: IA e Produtividade",
+    "robozDesc": "Seu assistente pessoal inteligente para tradução instantânea, redação profissional, código e brainstorming criativo.",
+    "robozTags": [
+      "Assistente de IA",
+      "Chat Inteligente",
+      "Código e Redação",
+      "IA Generativa"
+    ],
+    "robozCta": "Página na Play Store",
+    "gamesTitle": "Jogos de Raciocínio e Quebra-cabeça (Coming Soon)",
+    "gamesCat": "Categoria: Jogos e Entretenimento",
+    "gamesDesc": "Desafios intelectuais interativos e quebra-cabeças em breve, criados para todas as idades com gráficos polidos.",
+    "gamesTags": [
+      "Jogos Casuais",
+      "Quebra-cabeças",
+      "Desafios Diários",
+      "Em breve"
+    ],
+    "gamesCta": "Em desenvolvimento ⏳",
+    "privacyLink": "Política de Privacidade",
+    "trustTitle": "Conformidade e padrões oficiais do Google",
+    "trustDesc": "Todos os aplicativos seguem rigorosamente as políticas de privacidade e padrões de desenvolvedor do Google Play e AdMob.",
+    "appAdsHeader": "Arquivo de segurança de anúncios (app-ads.txt)",
+    "appAdsStatus": "● Ativo e Verificado",
+    "appAdsBtn": "Ver arquivo ao vivo ➔",
+    "footerDev": "Eng. Abdelmonem Madkour",
+    "footerApps": "Nossos aplicativos",
+    "footerPrivacy": "Política de Privacidade",
+    "footerSupport": "Suporte Técnico",
+    "copyright": "Todos os direitos reservados © 2026 MADKOUR.tech • Eng. Abdelmonem Madkour (abdelmonem.m.a.madkour@gmail.com)"
+  },
+  "ja": {
+    "pageTitle": "MADKOUR.tech | アブデルモネム・マドクール公式ウェブサイト",
+    "brandSubtitle": "公式開発スタジオ",
+    "navApps": "アプリカテゴリー",
+    "navTrust": "コンプライアンスとAdMob",
+    "navContact": "サポートとお問い合わせ",
+    "contactBtn": "開発者に連絡 ✉️",
+    "langModalTitle": "言語を選択してください",
+    "langModalSub": "ブラウザ言語の自動検出および13言語の即時切り替えに対応",
+    "heroBadge": "アブデルモネム・マドクール公式アプリハブ • MADKOUR.tech",
+    "heroTitle": "あなたの毎日のためのスマートなソリューション<br><span>教育 • 金融 • AIツール • ゲーム</span>",
+    "heroSub": "Google Play認証済みのアプリをカテゴリー別にご覧いただけます。",
+    "categoriesTitle": "アプリカテゴリーとエコシステム",
+    "categoriesSub": "カテゴリーを選択して絞り込み:",
+    "searchPlaceholder": "アプリ名、カテゴリー、キーワードで検索...",
+    "tabAll": "🌟 すべて",
+    "tabEdu": "🎓 教育",
+    "tabFinance": "💰 金融・給与",
+    "tabAi": "🤖 AIツール",
+    "tabGames": "🎮 ゲーム・娯楽",
+    "darsTitle": "Private Tutor AI (درس خصوصي)",
+    "darsCat": "カテゴリー: 教育アプリ",
+    "darsDesc": "17か国の公式カリキュラムとアズハル教育に対応したAI家庭教師。9言語でカメラによる宿題解説をサポート。",
+    "darsTags": [
+      "教育",
+      "17か国のカリキュラム",
+      "アズハル",
+      "カメラ即時解説"
+    ],
+    "darsCta": "アプリをダウンロード",
+    "ratbiTitle": "Ratbi: 給与・手当計算 (راتبي)",
+    "ratbiCat": "カテゴリー: 金融・給与",
+    "ratbiDesc": "カウントダウンタイマーと給料日通知機能を備えた、従業員向けの高精度な給与・手当計算アプリ。",
+    "ratbiTags": [
+      "金融",
+      "給与計算",
+      "給料日通知",
+      "Google Play"
+    ],
+    "ratbiCta": "Google Play (公開中)",
+    "masareefiTitle": "Masareefi: 支出管理 (مصاريفي)",
+    "masareefiCat": "カテゴリー: 個人向け金融",
+    "masareefiDesc": "分かりやすいグラフで日々の支出と毎月の予算を管理し、計画的な貯金をサポートします。",
+    "masareefiTags": [
+      "金融",
+      "予算管理",
+      "ビジュアルレポート",
+      "Google Play"
+    ],
+    "masareefiCta": "Google Play (公開中)",
+    "robozTitle": "Roboz AI Assistant (روبوز)",
+    "robozCat": "カテゴリー: AI・生産性向上",
+    "robozDesc": "高精度な多言語翻訳、ビジネスメール作成、プログラミング、アイデア出しを支えるインテリジェントなAIアシスタント。",
+    "robozTags": [
+      "AIアシスタント",
+      "スマートチャット",
+      "コード・テキスト作成",
+      "生成AI"
+    ],
+    "robozCta": "ストアページ",
+    "gamesTitle": "頭脳・パズルゲーム (Coming Soon)",
+    "gamesCat": "カテゴリー: ゲーム・エンターテインメント",
+    "gamesDesc": "洗練されたグラフィックで、幅広い年齢層にお楽しみいただけるインタラクティブなパズルゲームがまもなく登場します。",
+    "gamesTags": [
+      "カジュアルゲーム",
+      "頭脳パズル",
+      "デイリーチャレンジ",
+      "近日公開"
+    ],
+    "gamesCta": "開発中 ⏳",
+    "privacyLink": "プライバシーポリシー",
+    "trustTitle": "Google公式のコンプライアンスとセキュリティ基準",
+    "trustDesc": "すべてのアプリはGoogle PlayおよびAdMobのプライバシー保護と開発者ポリシーに完全準拠しています。",
+    "appAdsHeader": "広告セキュリティファイル (app-ads.txt)",
+    "appAdsStatus": "● 有効かつ検証済み",
+    "appAdsBtn": "ライブファイルを表示 ➔",
+    "footerDev": "アブデルモネム・マドクール",
+    "footerApps": "提供アプリ一覧",
+    "footerPrivacy": "プライバシーポリシー",
+    "footerSupport": "テクニカルサポート",
+    "copyright": "無断転載を禁じます © 2026 MADKOUR.tech • アブデルモネム・マドクール (abdelmonem.m.a.madkour@gmail.com)"
+  }
+};
+
+    let currentLang = 'ar';
+
+    // 1. الكشف التلقائي عن لغة المتصفح
+    function detectInitialLanguage() {
+      try {
+        const saved = localStorage.getItem('madkour_lang');
+        if (saved && i18n[saved]) return saved;
+      } catch (e) {}
+
+      const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || 'ar'];
+      for (let bl of browserLangs) {
+        bl = (bl || '').toLowerCase();
+        for (let l of supportedLanguages) {
+          if (bl.startsWith(l.code)) {
+            return l.code;
+          }
+        }
+      }
+      return 'en'; // إذا لم تكن لغة عربية أو من القائمة، الافتراضي هو الإنجليزية
+    }
+
+    // 2. تطبيق اللغة وتحديث كامل عناصر الواجهة
+    function setLanguage(langCode, saveToStorage = true) {
+      if (!i18n[langCode]) langCode = 'en';
+      currentLang = langCode;
+
+      if (saveToStorage) {
+        try { localStorage.setItem('madkour_lang', langCode); } catch (e) {}
+      }
+
+      const langObj = supportedLanguages.find(l => l.code === langCode) || supportedLanguages[0];
+      const dictObj = i18n[langCode] || i18n['en'];
+
+      // تحديث اتجاه ولغة الصفحة
+      document.documentElement.lang = langCode;
+      document.documentElement.dir = langObj.dir;
+
+      // تحديث عنوان التبويب
+      document.title = dictObj.pageTitle;
+
+      // تحديث زر الهيدر
+      const flagEl = document.getElementById('activeLangFlag');
+      const nameEl = document.getElementById('activeLangName');
+      if (flagEl) flagEl.textContent = langObj.flag;
+      if (nameEl) nameEl.textContent = langObj.name;
+
+      // تحديث النصوص
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dictObj[key] !== undefined) {
+          el.innerHTML = dictObj[key];
+        }
+      });
+
+      // تحديث حقول الإدخال
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (dictObj[key] !== undefined) {
+          el.setAttribute('placeholder', dictObj[key]);
+        }
+      });
+
+      // تحديث وسوم الكروت
+      renderTags('tagsDars', dictObj.darsTags);
+      renderTags('tagsRatbi', dictObj.ratbiTags);
+      renderTags('tagsMasareefi', dictObj.masareefiTags);
+      renderTags('tagsRoboz', dictObj.robozTags);
+      renderTags('tagsGames', dictObj.gamesTags);
+
+      // تحديث حالة الأزرار داخل نافذة اللغات
+      renderLangModalGrid();
+    }
+
+    function renderTags(containerId, tagsArray) {
+      const container = document.getElementById(containerId);
+      if (!container || !tagsArray) return;
+      container.innerHTML = tagsArray.map(t => '<span class="tag">' + t + '</span>').join('');
+    }
+
+    // 3. إدارة نافذة اختيار اللغة المنبثقة
+    function openLangModal() {
+      renderLangModalGrid();
+      const modal = document.getElementById('langModal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeLangModal(event) {
+      if (event && event.target && event.target.id !== 'langModal') return;
+      const modal = document.getElementById('langModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function selectLanguage(code) {
+      setLanguage(code, true);
+      const modal = document.getElementById('langModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function renderLangModalGrid() {
+      const container = document.getElementById('langGridContainer');
+      if (!container) return;
+      container.innerHTML = supportedLanguages.map(l => {
+        const isActive = (l.code === currentLang);
+        return '<button type="button" class="lang-item-btn ' + (isActive ? 'active' : '') + '" onclick="selectLanguage(\'' + l.code + '\')">' +
+          '<span class="lang-item-flag">' + l.flag + '</span>' +
+          '<div class="lang-item-names">' +
+            '<span class="lang-item-native">' + l.name + '</span>' +
+            '<span class="lang-item-en">' + l.enName + '</span>' +
+          '</div>' +
+        '</button>';
+      }).join('');
+    }
+
+    // إغلاق النافذة بزر Esc
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('langModal');
+        if (modal) modal.classList.remove('active');
+      }
+    });
+
+    // =========================================================================
+    // تصفية وبحث التطبيقات
+    // =========================================================================
     let currentCategory = 'all';
 
     function filterCategory(cat, btn) {
@@ -812,6 +2233,12 @@ google.com, pub-5678156801731088, DIRECT, f08c47fec0942fa0
         }
       });
     }
+
+    // تشغيل اللغة عند التحميل
+    document.addEventListener('DOMContentLoaded', () => {
+      const initialLang = detectInitialLanguage();
+      setLanguage(initialLang, false);
+    });
   </script>
 
 </body>
