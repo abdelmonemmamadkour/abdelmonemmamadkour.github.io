@@ -8,29 +8,33 @@
         :root {
             --bg-color: #0b0f19;
             --card-bg: #131b2e;
-            --border-color: rgba(56, 189, 248, 0.2);
+            --border-color: rgba(56, 189, 248, 0.22);
             --primary: #38bdf8;
             --accent: #10b981;
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --text-muted: #cbd5e1;
+            --text-dim: #94a3b8;
         }
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: var(--bg-color);
             color: var(--text-main);
             line-height: 1.85;
-            padding: 24px 16px;
-            max-width: 860px;
+            padding: 24px 16px 48px;
+            max-width: 880px;
             margin: 0 auto;
         }
         .header-bar {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
             margin-bottom: 24px;
         }
-        .back-btn {
+        .back-btn, .lang-jump-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -44,74 +48,242 @@
             font-size: 13.5px;
             transition: all 0.2s ease;
         }
-        .back-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--primary); }
+        .back-btn:hover, .lang-jump-btn:hover {
+            background: rgba(56, 189, 248, 0.16);
+            border-color: var(--primary);
+            text-decoration: none;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 22px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            padding: 26px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.35);
         }
-        h1 { font-size: 26px; font-weight: 800; color: #fff; margin: 0 0 10px; }
-        h2 { font-size: 20px; font-weight: 700; color: var(--primary); margin: 0 0 14px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px; }
-        p { color: var(--text-muted); margin: 0 0 14px; font-size: 15px; }
-        ul { margin: 0 0 16px; padding-right: 22px; color: var(--text-muted); }
-        li { margin-bottom: 8px; }
+        .en-section {
+            direction: ltr;
+            text-align: left;
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 2px dashed rgba(56, 189, 248, 0.25);
+        }
+        .en-section ul {
+            padding-right: 0;
+            padding-left: 22px;
+        }
+        h1 { font-size: 25px; font-weight: 800; color: #fff; margin: 0 0 12px; }
+        h2 { font-size: 19px; font-weight: 700; color: var(--primary); margin: 0 0 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
+        p { color: var(--text-muted); margin: 0 0 12px; font-size: 15px; }
+        ul { margin: 0 0 12px; padding-right: 22px; color: var(--text-muted); }
+        li { margin-bottom: 8px; font-size: 14.8px; }
         .badge {
             display: inline-block;
             background: rgba(16, 185, 129, 0.15);
             color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.35);
             padding: 4px 12px;
             border-radius: 8px;
             font-size: 12.5px;
             font-weight: 700;
-            margin-bottom: 12px;
+        }
+        code {
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-size: 13.5px;
+            direction: ltr;
+            display: inline-block;
         }
         a { color: var(--primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        .footer { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 35px; }
+        .footer { text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 32px; }
     </style>
 </head>
 <body>
 
     <div class="header-bar">
-        <a href="index.html" class="back-btn">➔ العودة للموقع الرئيسي (MADKOUR.tech)</a>
-        <span class="badge">تحديث: نوفمبر 2026</span>
+        <a href="index.html" class="back-btn">➔ العودة للمقر الرقمي (MADKOUR.tech)</a>
+        <div class="header-actions">
+            <a href="#en-version" class="lang-jump-btn">🌐 English Version ↓</a>
+            <span class="badge">آخر تحديث: 26 نوفمبر 2026</span>
+        </div>
     </div>
 
-    <div class="card">
-        <h1>سياسة الخصوصية — روبوز (Roboz AI)</h1>
-        <p><strong>المطور:</strong> المهندس عبد المنعم مدكور (MADKOUR.tech)</p>
-        <p>
-            تطبيق <strong>«روبوز»</strong> هو مساعد ذكاء اصطناعي تفاعلي صُمم لمساعدتك في كتابة المحتوى، الترجمة، حل المشكلات والبرمجة مع الالتزام بأعلى معايير حماية البيانات والخصوصية.
-        </p>
-    </div>
+    <!-- ===================================================================
+         القسم العربي (Arabic Version)
+         =================================================================== -->
+    <section id="ar-version" lang="ar" dir="rtl">
+        <div class="card">
+            <h1>سياسة الخصوصية — تطبيق روبوز (Roboz AI)</h1>
+            <p><strong>اسم الحزمة (Package ID):</strong> <code>tech.madkour.roboz</code></p>
+            <p><strong>المطور:</strong> المهندس عبد المنعم مدكور (MADKOUR.tech)</p>
+            <p><strong>البريد الرسمي للتواصل:</strong> <a href="mailto:abdelmonem.m.a.madkour@gmail.com">abdelmonem.m.a.madkour@gmail.com</a></p>
+            <p>
+                نحن في <strong>Roboz AI</strong> نحترم خصوصيتك ونلتزم بحماية بياناتك. توضح هذه السياسة بدقة وشفافية كيفية تعامل التطبيق مع بياناتك والأذونات المطلوبة وخدمات الطرف الثالث وفقاً لمعايير Google Play.
+            </p>
+        </div>
 
-    <div class="card">
-        <h2>1. معالجة محادثات الذكاء الاصطناعي</h2>
-        <p>
-            تتم معالجة نصوص المحادثات والاستفسارات بشكل فوري عبر واجهات برمجية آمنة ومشفرة تماماً بتقنية SSL/TLS. نحن لا نحتفظ بمحتوى رسائلك الشخصية ولا نقوم ببيعها أو مشاركتها مع أي جهة خارجية أو استخدامها في تدريب نماذج عامة.
-        </p>
-    </div>
+        <div class="card">
+            <h2>1. البيانات المخزنة محلياً على جهازك فقط</h2>
+            <ul>
+                <li><strong>المحادثات وسجل الشات:</strong> تُحفظ جميع محادثاتك وسجلاتها محلياً داخل ذاكرة جهازك فقط (<code>Local Storage</code>). لا نقوم بتخزين أو أرشفة محادثاتك على خوادمنا الخاصة.</li>
+                <li><strong>التفضيلات ومفتاح BYOK:</strong> إعدادات اللغة واللهجة والمفتاح الشخصي (BYOK) — إن قمت بإدخاله اختيارياً — تُحفظ محلياً على هاتفك فقط.</li>
+                <li><strong>عدم اشتراط حساب:</strong> لا يطلب التطبيق تسجيل دخول ولا يجمع الاسم أو رقم الهاتف أو الموقع الجغرافي.</li>
+            </ul>
+        </div>
 
-    <div class="card">
-        <h2>2. الإعلانات والخدمات المجانية</h2>
-        <p>
-            يقدم التطبيق خدماته بالاعتماد على إعلانات Google AdMob المتوافقة مع معايير الأمان الدولية وسياسات Google Play.
-        </p>
-    </div>
+        <div class="card">
+            <h2>2. المعالجة اللحظية بالذكاء الاصطناعي (Gemini AI)</h2>
+            <ul>
+                <li>عند إرسال رسالة نصية أو صورة مرفقة، تُنقل البيانات لحظياً عبر اتصال مشفّر بالكامل (<code>HTTPS / TLS</code>) عبر الخادم الوسيط للتطبيق (<code>roboz-proxy.vercel.app</code>) أو مباشرة بمفتاحك الشخصي إلى واجهة <strong>Google Gemini API</strong> لتوليد الرد فقط.</li>
+                <li>تُعالج الرسائل والصور لحظياً لتقديم الإجابة ولا نحتفظ بنسخة منها على خوادمنا ولا نبيعها أو نشاركها لأغراض تسويقية أو إعلانية.</li>
+            </ul>
+        </div>
 
-    <div class="card">
-        <h2>3. التواصل والاستفسار</h2>
-        <p>البريد الإلكتروني المعتمد لجميع استفسارات الخصوصية: <a href="mailto:abdelmonem.m.a.madkour@gmail.com">abdelmonem.m.a.madkour@gmail.com</a></p>
-    </div>
+        <div class="card">
+            <h2>3. الأذونات المطلوبة وسبب استخدامها</h2>
+            <p>يطلب التطبيق الأذونات الضرورية فقط وعند الاستخدام الفعلي للميزة:</p>
+            <ul>
+                <li><strong>الكاميرا (<code>CAMERA</code>) ومنتقي الصور النظامي (Android Photo Picker):</strong> يُطلب إذن الكاميرا فقط عند ضغطك على إرفاق صورة لتصوير مسألة أو مستند وتحليله بالذكاء الاصطناعي. اختيار الصور من المعرض يتم عبر منتقي النظام الآمن دون طلب صلاحية الوصول الدائم لمكتبة الصور (<code>READ_MEDIA_IMAGES</code>).</li>
+                <li><strong>الميكروفون (<code>RECORD_AUDIO</code>) وإعدادات الصوت:</strong> يُطلب فقط عند ضغطك على زر الإملاء الصوتي أو بدء المكالمة الصوتية لتحويل حديثك إلى نص فوري. لا يتم تسجيل أو حفظ أي مقاطع صوتية على خوادمنا.</li>
+                <li><strong>الاتصال بالإنترنت وفحص الشبكة:</strong> للتواصل المشفّر مع خدمة الذكاء الاصطناعي والتحقق من حالة الاشتراكات.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>4. أمان المحتوى المولّد بالذكاء الاصطناعي والإبلاغ</h2>
+            <ul>
+                <li>يعتمد التطبيق على إعدادات تصفية الأمان المدمجة من Google Gemini لحجب المحتوى الضار أو غير اللائق.</li>
+                <li>يعرض التطبيق إشعاراً واضحاً بأن الردود مولّدة آلياً، ويوفر زر إبلاغ مباشر (<code>🚩</code>) بجانب كل رد لإخفاء الردود غير الملائمة فوراً.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>5. الاشتراكات والإعلانات</h2>
+            <ul>
+                <li><strong>الإصدار الحالي (v1.0.6):</strong> خالٍ تماماً من الإعلانات ولا يستخدم أو يجمع معرّف الإعلانات (<code>Advertising ID</code>). في حال إضافة إعلانات مستقبلاً سيتم تحديث هذه السياسة والإفصاح عنها في Google Play مسبقاً.</li>
+                <li><strong>Google Play Billing:</strong> تتم عمليات الاشتراك في باقات (Plus / Pro) وإدارتها بالكامل عبر نظام الدفع الرسمي لمتجر Google Play. لا يصل التطبيق ولا يخزن أي بيانات لبطاقات الدفع أو الحسابات البنكية.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>6. الاحتفاظ بالبيانات وحذفها</h2>
+            <p>يمكنك حذف سجل محادثاتك أو مفتاح BYOK أو كافة بيانات التطبيق في أي وقت من خلال:</p>
+            <ul>
+                <li>زر مسح السجل داخل شاشة المحادثات في التطبيق.</li>
+                <li>مسح بيانات التطبيق من إعدادات الهاتف (الإعدادات ← التطبيقات ← Roboz ← مسح التخزين) أو إلغاء تثبيت التطبيق.</li>
+                <li>أو التواصل معنا عبر البريد الإلكتروني الرسمي لأي استفسار متعلق بالخصوصية.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>7. خصوصية الأطفال والتغييرات على السياسة</h2>
+            <ul>
+                <li>تطبيق <strong>Roboz AI</strong> غير موجّه للأطفال دون سن 13 عاماً، ولا نجمع عمداً أي بيانات شخصية من الأطفال.</li>
+                <li>قد نحدّث هذه السياسة مستقبلاً عند إضافة مزايا جديدة، وسيظهر تاريخ التحديث أعلى هذه الصفحة.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>8. التواصل والدعم الفني</h2>
+            <p>لأي استفسارات حول سياسة الخصوصية أو حقوق البيانات، يرجى مراسلتنا عبر البريد الرسمي للمطور:</p>
+            <p><a href="mailto:abdelmonem.m.a.madkour@gmail.com">abdelmonem.m.a.madkour@gmail.com</a></p>
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         English Version (للعملاء ومراجعي Google Play العالميين)
+         =================================================================== -->
+    <section id="en-version" class="en-section" lang="en" dir="ltr">
+        <div class="card">
+            <h1>Privacy Policy — Roboz AI</h1>
+            <p><strong>Package Name:</strong> <code>tech.madkour.roboz</code></p>
+            <p><strong>Developer:</strong> Eng. Abdelmonem Madkour (MADKOUR.tech)</p>
+            <p><strong>Official Contact Email:</strong> <a href="mailto:abdelmonem.m.a.madkour@gmail.com">abdelmonem.m.a.madkour@gmail.com</a></p>
+            <p>
+                At <strong>Roboz AI</strong>, we respect your privacy and are committed to protecting your information. This Privacy Policy explains transparently how our Android application processes data, uses runtime permissions, and integrates third-party services in compliance with Google Play policies.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>1. Local-Only Device Storage</h2>
+            <ul>
+                <li><strong>Chat History:</strong> All conversations and chat histories are stored locally on your device only (<code>Local Storage</code>). We do not store, archive, or inspect your personal chats on our servers.</li>
+                <li><strong>Preferences &amp; BYOK Keys:</strong> Language, dialect settings, and optional personal API keys (BYOK) are stored strictly locally on your device.</li>
+                <li><strong>No Account Required:</strong> The app does not require registration or login and does not collect your name, phone number, or location.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>2. Ephemeral AI Processing (Google Gemini API)</h2>
+            <ul>
+                <li>When you submit a text prompt or attached image, it is transmitted ephemerally over an encrypted <code>HTTPS / TLS</code> connection through our stateless proxy (<code>roboz-proxy.vercel.app</code>) or directly using your BYOK key to <strong>Google Gemini API</strong> solely to generate a reply.</li>
+                <li>Prompts and images are processed in real time and are never permanently saved on our servers, sold, or shared for advertising purposes.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>3. App Permissions &amp; Usage</h2>
+            <p>Permissions are requested strictly at runtime only when you choose to use the related feature:</p>
+            <ul>
+                <li><strong>Camera (<code>CAMERA</code>) &amp; Android Photo Picker:</strong> Requested only when attaching a photo to capture a question, equation, or document for AI analysis. Gallery selection uses the system Android Photo Picker without broad media storage permissions (no <code>READ_MEDIA_IMAGES</code>).</li>
+                <li><strong>Microphone (<code>RECORD_AUDIO</code>) &amp; Audio Settings:</strong> Requested only when tapping voice input or starting a voice call for real-time speech-to-text transcription. No audio recordings are stored or uploaded to our servers.</li>
+                <li><strong>Internet &amp; Network State:</strong> Used for encrypted AI API communication and verifying subscription status.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>4. AI Content Moderation &amp; Reporting</h2>
+            <ul>
+                <li>The app enables Google Gemini built-in safety filters (<code>safetySettings</code>) to block harmful or inappropriate content.</li>
+                <li>In-chat disclaimers clarify that responses are AI-generated, and each AI reply provides a Report button (<code>🚩</code>) allowing users to flag and hide unsuitable outputs immediately.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>5. Ads &amp; Subscriptions</h2>
+            <ul>
+                <li><strong>Current Version (v1.0.6):</strong> Completely ad-free and does not collect or use any Advertising ID. If ads are introduced in a future update, this policy and Play Console declarations will be updated accordingly beforehand.</li>
+                <li><strong>Google Play Billing:</strong> Plus and Pro subscriptions are processed securely through official Google Play Billing. We never access, process, or store your payment card or banking details.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>6. Data Retention &amp; Deletion</h2>
+            <p>Because conversations and preferences are stored on your device, you can permanently delete all data anytime by:</p>
+            <ul>
+                <li>Using the in-app Clear History button.</li>
+                <li>Clearing app storage in Android Settings (Settings &rarr; Apps &rarr; Roboz &rarr; Clear Storage) or uninstalling the app.</li>
+                <li>Contacting us via email for any privacy inquiry.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>7. Children's Privacy &amp; Policy Updates</h2>
+            <ul>
+                <li><strong>Roboz AI</strong> is intended for users aged 13 and above and does not knowingly collect personal information from children under 13.</li>
+                <li>We may update this Privacy Policy as features evolve; any updates take effect from the revision date shown at the top of this page.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>8. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or data handling, contact the developer directly at:</p>
+            <p><a href="mailto:abdelmonem.m.a.madkour@gmail.com">abdelmonem.m.a.madkour@gmail.com</a></p>
+        </div>
+    </section>
 
     <div class="footer">
-        <p>© 2026 MADKOUR.tech • جميع الحقوق محفوظة للمطور عبد المنعم مدكور</p>
+        <p>© 2026 MADKOUR.tech • Eng. Abdelmonem Madkour — All Rights Reserved</p>
     </div>
 
 </body>
 </html>
-
